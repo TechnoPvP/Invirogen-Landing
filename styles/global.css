@@ -1,0 +1,412 @@
+/* @font-face {
+	font-family: 'Gotham';
+	src: url('/fonts/Gotham-Thin.otf') format('opentype');
+	font-weight: 100;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'Gotham';
+	src: url('/fonts/GothamLight.ttf') format('truetype'), url('/fonts/Gotham-Light.otf') format('opentype');
+	font-weight: 200;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'Gotham';
+	src: url('/fonts/GothamBook.ttf') format('truetype');
+	font-weight: 300;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'Gotham';
+	src: url('/fonts/GothamMedium.ttf') format('truetype');
+	font-weight: 400;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'Gotham';
+	src: url('/fonts/GothamBold.ttf') format('truetype'), url('/fonts/Gotham-Bold.otf') format('opentype');
+	font-weight: 600;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Gotham';
+	src: url('/fonts/Gotham-Black.otf') format('opentype');
+	font-weight: 700;
+	font-style: normal;
+} */
+@import url('http://fonts.cdnfonts.com/css/century-gothic');
+:root {
+	--dark-gray: #393c41;
+	--fw-book: 500;
+	--light-gray: #f4f4f4;
+	--primary: #2d67b2;
+	--heading-1: 2.857142857142857em;
+	--heading-2: 34px;
+	--heading-3: 30px;
+	--heading-4: 2em;
+	--sub: 17px;
+	--body: 1em;
+	--border-radius: 20px;
+}
+html,
+* {
+	box-sizing: border-box;
+	scroll-behavior: smooth;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+body {
+	margin: 0;
+	padding: 0;
+}
+h1 {
+	font-size: var(--heading-1);
+	color: var(--dark-gray);
+}
+h2 {
+	font-size: var(--heading-2);
+	color: var(--dark-gray);
+}
+h4 {
+	font-size: var(--heading-4);
+	font-weight: 700;
+	color: var(--dark-gray);
+}
+p {
+	font-size: var(--body);
+	font-weight: var(--fw-book);
+	line-height: 170%;
+	color: var(--dark-gray);
+}
+body {
+	/* font-size: calc(14px + (26 - 14) * ((100vw - 300px) / (1600 - 300))); */
+	font-size: 0.9rem;
+	height: 100%;
+	width: 100%;
+	font-family: 'Raleway', sans-serif;
+	color: var(--dark-gray);
+	overflow: hidden;
+}
+html {
+	height: calc(100% - 60px);
+	/* height: 100%; */
+}
+
+.logo {
+	max-block-size: 19px;
+}
+a {
+	color: var(--dark-gray);
+	font-weight: bold;
+	font-size: 14px;
+	text-decoration: none;
+}
+
+/* Navigation CSS */
+.nav {
+	display: flex;
+	padding: 0 41px;
+	height: 60px;
+	align-items: center;
+	position: relative;
+	justify-content: space-between;
+}
+.nav__ol {
+	display: inline-flex;
+	margin: 0;
+	padding: 0;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	transition: width 0.35s linear;
+	list-style-type: none;
+}
+.nav__li {
+	transition: background-color 0.5s ease-out;
+	font-size: 14px;
+}
+.nav__a span {
+	position: relative;
+}
+.nav__a {
+	position: relative;
+	width: 120px;
+	text-align: center;
+	letter-spacing: 1px;
+	display: block;
+	margin: 0;
+	padding: 7px 0px;
+	text-decoration: none;
+	height: 100%;
+	z-index: 10;
+}
+.nav__underline {
+	height: 2px;
+	width: 100%;
+	position: absolute;
+	background-color: var(--primary);
+	display: block;
+	bottom: -4px;
+	left: 0;
+
+	animation: slide_underline 0.35s linear;
+}
+
+@keyframes slide_underline {
+	from {
+		width: 0%;
+	}
+	to {
+		width: 100%;
+	}
+}
+
+/* Overlay CSS */
+#overlay {
+	background-color: var(--light-gray);
+	position: absolute;
+	width: 100px;
+	height: 100px;
+	border-radius: var(--border-radius);
+	transition: opacity 0.25s linear, left 0.25s linear;
+	opacity: 0;
+}
+#overlay.active {
+	opacity: 1;
+}
+.blur-overlay {
+	position: absolute;
+	opacity: 0;
+	background-color: rgba(75, 75, 75, 0.26);
+	height: 100%;
+	width: 100%;
+	backdrop-filter: blur(3px);
+	transition: opacity 0.25s linear;
+	overflow: hidden;
+	z-index: -1;
+}
+.blur-overlay.active {
+	opacity: 1;
+	z-index: 1;
+}
+
+/* Sidebar Menu In Navigation */
+.sidebar {
+	position: absolute;
+	right: -300px;
+	top: 0;
+	z-index: 9;
+	width: 300px;
+	height: 100%;
+	display: none;
+	background-color: white;
+
+	padding: 70px 30px;
+
+	/* transition: right 0.25s linear; */
+}
+.sidebar > ol {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+.sidebar__li {
+	margin: 10px 0px;
+	text-align: left;
+	border-radius: var(--border-radius);
+	transition: background-color 0.25s linear;
+}
+
+.sidebar__li a {
+	width: 100%;
+	display: block;
+	text-align: left;
+	padding: 7px 15px;
+	font-size: 14px;
+	letter-spacing: 1px;
+	opacity: 80%;
+	border-radius: var(--border-radius);
+
+	transition: background-color 0.25s linear;
+}
+.sidebar__li:hover {
+	background-color: var(--light-gray);
+}
+.visible {
+	display: block;
+}
+
+/* Body */
+.flex {
+	display: flex;
+	height: 100%;
+}
+
+.price {
+	position: absolute;
+	bottom: -40px;
+	width: 300px;
+	padding: 5px 5px;
+
+	left: 50%;
+	transform: translate(-50%, 15%);
+	font-size: 18px;
+	font-weight: 500;
+	z-index: 10;
+
+	background-color: var(--light-gray);
+	border-radius: var(--border-radius);
+	text-align: center;
+}
+
+.flex__image-full {
+	background: url(/assets/solar_install_photo.jpg);
+	background-position: 50%;
+	background-repeat: no-repeat;
+	background-size: cover;
+	flex-grow: 1;
+}
+.slider {
+	flex-grow: 1;
+}
+
+.flex__col {
+	width: 450px;
+	/* margin: 0 auto; */
+	display: none;
+	padding: 2em 40px;
+}
+
+.flex__col.active {
+	display: block;
+}
+.flex__col__h4 {
+	margin-bottom: 12px;
+}
+.flex__image {
+	width: 70%;
+}
+
+/* Form Related */
+.form {
+	display: flex;
+	margin: 35px 0px;
+	flex-flow: column;
+}
+.form label {
+	font-weight: 600;
+	padding-left: 11px;
+	margin-bottom: 10px;
+	color: #5c5e62;
+	display: block;
+}
+
+.input {
+	border-radius: var(--border-radius);
+	border: none;
+	padding: 10px 20px;
+	background-color: var(--light-gray);
+	width: 100%;
+}
+.form__wrap {
+	position: relative;
+	display: flex;
+	flex-flow: column;
+	align-items: left;
+	margin-bottom: 25px;
+}
+.form__wrap-col {
+	margin-bottom: 0;
+	flex-flow: row;
+}
+.spacer {
+	width: 30px;
+}
+.form__placeholder {
+	position: absolute;
+	font-weight: 500;
+	font-size: 15px;
+	right: 20px;
+	bottom: 9px;
+}
+
+.button {
+	padding: 13px 0;
+	font-weight: 600;
+	border-radius: var(--border-radius);
+	border: none;
+}
+/* Button Related */
+.button-action {
+	background-color: var(--primary);
+	color: white;
+
+	transition: background-color 0.15s linear;
+}
+
+input:focus {
+	outline: none;
+	border: 1px solid var(--dark-gray);
+}
+.button:hover {
+	/* background-color: #2d67b2; */
+	background-color: #5091e5;
+}
+.button:disabled,
+.button[disabled] {
+	background-color: #2d67b2;
+	opacity: 71%;
+}
+.button:disabled:hover,
+.button[disabled]:hover {
+	cursor: not-allowed;
+}
+
+.sidebar__footer {
+	position: absolute;
+	bottom: 20px;
+	left: 30px;
+}
+
+/* Text Related Css */
+.text__footer {
+	color: var(--dark-gray);
+	opacity: 70%;
+	font-weight: 200;
+}
+
+@media screen and (max-width: 1200px) {
+	body {
+		overflow: auto;
+	}
+	.nav__ol {
+		display: none;
+	}
+}
+
+@media screen and (max-width: 990px) {
+	.flex {
+		flex-direction: column;
+	}
+
+	.flex__col {
+		width: 100%;
+		height: auto;
+		border: 1px solid red;
+	}
+	.price {
+		display: none;
+		background-color: white;
+	}
+	.form {
+		/* margin-bottom: 2em; */
+		/* flex-grow: 1; */
+	}
+}
