@@ -8,23 +8,28 @@
     <link rel="stylesheet" type="text/css" href="styles/global.css">
     <link rel="stylesheet" type="text/css" href="styles/plugin.css">
     <link rel="stylesheet" type="text/css" href="styles/solar.css">
+    <script src="/scripts/placesHandler.js"></script>
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAix6OcLoOvh009OoPCM4WwKSo0bxSdDQc&callback=initAutocomplete&libraries=places&v=weekly"
+        async> </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="scripts/script.js"></script>
     <title>Solar Quote</title>
 </head>
 
-
 <body>
     <div class="blur-overlay"></div>
     <nav class="nav">
-        <img class="logo" src="assets/inviro_logo.png" alt="Invirogen logo written in all black">
-        <div id="overlay">
-        </div>
+        <div id="overlay"></div>
+        <a class="logo" href="#"><img class="logo__img" src="assets/inviro_logo.png"
+                alt="Invirogen logo written in all black"></a>
         <ol class="nav__ol">
-
-            <li class="nav__li"><a class="nav__a" href="/solar.html"><span>Solar<div class="nav__underline"></div>
+            <li class="nav__li"><a class="nav__a" href="/solar.html"><span>Solar <div class="nav__underline"></div>
                     </span></a></li>
-            <li class="nav__li"><a class="nav__a" href="/versailles.html"><span>Versailles</span>
+            <li class="nav__li">
+                <a class="nav__a" href="/versailles.html">
+                    <span>Versailles
+                    </span>
                 </a>
             </li>
         </ol>
@@ -37,8 +42,8 @@
     </nav>
     <div class="sidebar">
         <ol>
-            <li class="sidebar__li"> <a href="#">Products</a> </li>
-            <li class="sidebar__li"> <a href="#">Reserve</a> </li>
+            <!-- <li class="sidebar__li"> <a href="#">Products</a> </li> -->
+            <!-- <li class="sidebar__li"> <a href="#">Reserve</a> </li> -->
             <li class="sidebar__li"> <a href="/solar.html">Solar</a> </li>
             <li class="sidebar__li"> <a href="/versailles.html">Versailles</a> </li>
             <li class="sidebar__li sidebar__li-bottom"> <a href="">Login</a> </li>
@@ -48,16 +53,13 @@
 
     <div class="flex">
         <div class="slider">
-            <div class="slide active"><img
-                    src="/assets/solar/home-with-beach-vibes-has-solar-panels-on-rooftop-9YK2MHN.jpg">
-            </div>
-            <div class="slide"><img src="/assets/solar/Modern Home With Solar Panels.jpg"></div>
-            <div class="slide"><img src="/assets/solar/Aireal View Of Solar Panels.jpg"></div>
-            <div class="slide"><img src="/assets/solar/Crew Install Solar Panels On Roof.jpg"></div>
-            <div class="slide"><img src="/assets/solar/Home With Solar Panels.jpg"></div>
-            <div class="slide"><img src="/assets/solar/Solar Power.png"></div>
-            <div class="dots">
-            </div>
+            <div class="slide active"><img src="/assets/solar/Modern Home With Solar Panels.jpg"></div>
+            <div class="slide"><img src="/assets/solar/Solar Panel Roof Beauty Shot.jpg"></div>
+            <div class="slide"><img src="/assets/solar/Florida Home WIth Solar Panels On Roof.jpg"></div>
+            <div class="slide"><img src="/assets/solar/Photo Of Man Installing Solar Panels.jpg"></div>
+            <div class="slide"><img src="/assets/solar/Backyard With Solar Installed On Modern Home.jpg"></div>
+            <div class="slide"><img src="/assets/solar/Solar Panels Invirogen.jpg"></div>
+            <div class="dots"></div>
             <button class="circle circle-next">
                 <div class="arrow arrow-right"></div>
             </button>
@@ -74,7 +76,7 @@
             <form class="form">
                 <div class="form__wrap">
                     <label for="address">Home Address</label>
-                    <input class="input" type="text" name="address" />
+                    <input id="autocomplete" class="input" type="text" name="address" autocomplete="off" />
                 </div>
                 <div class="form__wrap">
                     <label for="address">Average Electric Bill</label>
@@ -82,14 +84,15 @@
                     <div class="form__placeholder">/ mo</div>
                 </div>
 
-                <input type="submit" value="Next" id="solar-next-button" class="button button-action" disabled>
+                <input type="submit" value="Next" id="solar-next-button" class="button button-action">
             </form>
+            <!-- <div class="flex__details"><a href="#" class="text__subheading">Details</a></div> -->
         </div>
         <!-- Other Form -->
         <div id="solar-form-2" class="flex__col">
             <h4 class="flex__col__h4">Who is this quote for?</h4>
             <p>We know going solar can be complicated. We are here as your expert guide every step of the way.</p>
-            <form action="http://localhost:3000/data" method="POST" name="solar" class="form">
+            <form action="https://formkeep.com/f/6dacbccf338f method=" POST" name="solar" class="form">
                 <div class="form__wrap form__wrap-col">
                     <div class="form__wrap">
                         <label class="form__label" for="first">First Name</label>
@@ -103,7 +106,7 @@
                 </div>
                 <div class="form__wrap">
                     <label for="phone">Phone Number</label>
-                    <input class="input" type="phone" name="phone" />
+                    <input class="input" type="tel" name="phone" />
                 </div>
 
                 <div class="form__wrap">
@@ -115,7 +118,6 @@
             </form>
         </div>
     </div>
-
 </body>
 
 </html>

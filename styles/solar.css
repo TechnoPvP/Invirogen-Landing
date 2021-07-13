@@ -19,7 +19,7 @@
 .slide img {
 	width: 100%;
 	object-fit: cover;
-	object-position: 30% 35%;
+	object-position: 40% 55%;
 	height: 100%;
 }
 .slide__small_image {
@@ -41,7 +41,7 @@
 	width: 10px;
 	height: 10px;
 	margin: 0px 7px;
-	background-color: rgba(133, 133, 133, 0.568);
+	border: 1px solid rgba(255, 255, 255, 0.808);
 	border-radius: 100%;
 
 	transition: background-color 0.25s linear;
@@ -58,10 +58,11 @@
 }
 .dots__dot.active {
 	background-color: #2d67b2;
+	border-color: #2d67b2;
 }
 .circle {
-	display: flex;
 	position: absolute;
+	display: flex;
 	width: 50px;
 	height: 50px;
 	justify-content: center;
@@ -79,20 +80,26 @@
 .circle.visible {
 	opacity: 1;
 }
-.circle:hover {
+/* .circle:hover {
 	background-color: #2d67b2;
-}
+} */
 .arrow {
 	border-top: 10px solid transparent;
 	border-bottom: 10px solid transparent;
 
-	transition: border-left 0.25s linear;
+	transition: border-left 0.25s linear, border-right 0.25s linear;
 }
 .arrow-left {
 	border-right: 10px solid rgba(205, 205, 205, 0.57);
 }
 .arrow-right {
 	border-left: 10px solid rgba(205, 205, 205, 0.57);
+}
+.arrow-left.active {
+	border-right: 10px solid #2d67b2;
+}
+.arrow-right.active {
+	border-left: 10px solid #2d67b2;
 }
 
 .circle-next {
@@ -108,10 +115,30 @@
 		overflow: auto;
 	}
 	.slider {
-		height: 100%;
-		border: 3px solid aqua;
+		flex-grow: 1;
 	}
 	.slider--I {
-		margin: 0;
+		margin-bottom: 0;
+	}
+	.slide__small_image {
+		max-width: auto;
+		width: auto;
+		height: auto;
+	}
+	.circle {
+		width: 30px;
+		height: 30px;
+	}
+	.arrow {
+		border-top: 7px solid transparent;
+		border-bottom: 7px solid transparent;
+
+		transition: border-left 0.25s linear;
+	}
+	.arrow-left {
+		border-right: 7px solid rgba(205, 205, 205, 0.57);
+	}
+	.arrow-right {
+		border-left: 7px solid rgba(205, 205, 205, 0.57);
 	}
 }

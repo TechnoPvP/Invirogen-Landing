@@ -15,9 +15,8 @@ $(document).ready(function() {
 		}
 	});
 
-	$('.form').on('focusout', function() {
+	$('.form').on('input', function() {
 		let valid = true;
-
 		const inputFields = $(this).find('.input');
 		inputFields.each(function(index, elem) {
 			if (!elem.value) {
@@ -27,15 +26,9 @@ $(document).ready(function() {
 		});
 		if (valid) {
 			$('.button-action').prop('disabled', false);
-			//TODO Dobule Validation for some reason
-			// console.log('valid');
 		} else {
 			$('.button-action').prop('disabled', true);
 		}
-	});
-
-	$('.form').change(function() {
-		console.log(e);
 	});
 
 	// Solar next button
@@ -58,8 +51,10 @@ $(document).ready(function() {
 		//listen for submit event
 		//TODO Can this be dynamic, it's hardcoded
 		e.preventDefault();
-		var v = $(this).serialize();
+		var v = $(e.target).serializeArray();
+		console.log(v);
 		const data = [
+			...v,
 			{
 				name  : 'address',
 				value : window.localStorage.getItem('address')
@@ -82,14 +77,16 @@ $(document).ready(function() {
 			data        : JSON.stringify(data),
 			async       : true,
 			crossDomain : true,
-			url         : 'http://localhost:3000/data',
+			url         : 'https://formkeep.com/f/6dacbccf338f',
 			method      : 'POST',
 			headers     : {
 				accept                        : 'application/json',
 				'Access-Control-Allow-Origin' : '*'
 			}
 		};
+		$.post('https://formkeep.com/f/6dacbccf338f', settings);
 	});
+
 	// Code Related too navigation hover.
 	const nav_list = document.querySelectorAll('.nav__a');
 	const overlay = document.querySelector('#overlay');
@@ -118,14 +115,15 @@ $(document).ready(function() {
 	// Slider code
 	const prev = $('.circle-back');
 	const next = $('.circle-next');
+
 	const dotsElem = $('.dots');
-
 	dotsElem.on('click', function(e) {
-		const targetId = e.target.attributes['data-id'].value;
+		const targetId = e.target.attributes['data-id'];
 
-		console.log(targetId);
+		if (!targetId) return false;
+
 		lastSlide = currentSlide;
-		getSlide(targetId);
+		getSlide(targetId.value);
 	});
 
 	const slides = [ ...$('.slide') ];
@@ -200,8 +198,19 @@ $(document).ready(function() {
 		};
 	};
 
-	const slideShowELem = slideShow(4.5);
+	// Circle Next Slide Button Hover
+	if ($(window).width() >= 990) {
+		$('.circle').hover(
+			function(e) {
+				const arrow = $(this).children();
 
+				arrow.toggleClass('active');
+			},
+			function() {
+				$(this).children().toggleClass('active');
+			}
+		);
+	}
 	// Code Related to showing the slider button
 	$('.slider').hover(
 		function() {
@@ -214,6 +223,7 @@ $(document).ready(function() {
 		}
 	);
 
+	const slideShowELem = slideShow(4.5);
 	setupDots();
 	prev.click(function() {
 		prevSlide();
