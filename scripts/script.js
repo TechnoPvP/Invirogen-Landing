@@ -1,18 +1,37 @@
 $(document).ready(function() {
 	// Navbar hamburger click event
-	$('#hamburger').click(function() {
-		const sideBar = $('.sidebar');
 
-		$(this).toggleClass('open');
-		$('.blur-overlay').toggleClass('active');
+	var s,
+		Sidebar = {
+			settings      : {
+				sidebar     : $('.sidebar'),
+				hamburger   : $('#hamburger'),
+				blurOverlay : $('.blur-overlay')
+			},
+			init          : function() {
+				s = this.settings;
+				this.bindUI();
+				console.log('Loaded sidebar widget');
+			},
 
-		if (!sideBar.hasClass('visible')) {
-			sideBar.animate({ right: '0px' }, 400).addClass('visible');
-		} else {
-			sideBar.animate({ right: '-300px' }, 400, function() {
-				sideBar.removeClass('visible');
-			});
-		}
+			bindUI        : function() {
+				$('#hamburger').on('click', function() {
+					Sidebar.toggleSidebar();
+				});
+
+				console.log('UI Binded');
+			},
+			toggleSidebar : function() {
+				s.sidebar.toggleClass('active');
+				s.hamburger.toggleClass('open');
+				s.blurOverlay.toggleClass('active');
+			}
+		};
+
+	Sidebar.init();
+
+	$('#nav').load('../nav.html', function() {
+		console.log('Loaded nav bar');
 	});
 
 	$('.form').on('input', function() {
@@ -38,9 +57,8 @@ $(document).ready(function() {
 		$('#solar-form-1').toggleClass('active');
 		const fields = e.target.length - 1;
 		for (let x of e.target) {
-			const value = $(x).val();
-
 			if ($(x).attr('type') != 'submit') {
+				const value = $(x).val();
 				const name = $(x).attr('name');
 				window.localStorage.setItem(name, value);
 			}
@@ -52,7 +70,7 @@ $(document).ready(function() {
 		//TODO Can this be dynamic, it's hardcoded
 		e.preventDefault();
 		var v = $(e.target).serializeArray();
-		console.log(v);
+
 		const data = [
 			...v,
 			{
@@ -77,14 +95,22 @@ $(document).ready(function() {
 			data        : JSON.stringify(data),
 			async       : true,
 			crossDomain : true,
-			url         : 'https://formkeep.com/f/6dacbccf338f',
 			method      : 'POST',
 			headers     : {
 				accept                        : 'application/json',
 				'Access-Control-Allow-Origin' : '*'
+			},
+			sucess      : function() {
+				window.location.href = '/solar.html';
 			}
 		};
-		$.post('https://formkeep.com/f/6dacbccf338f', settings);
+		// $.post('http://adamscode.com/api/inviro/solar', settings, (res, err) => {
+		// 	console.log(res, err);
+		// 	window.location.href = '/solar.html';
+		// });
+		$.post('http://localhost:3000/api/inviro/solar', settings, (res, err) => {
+			console.log(res, err);
+		});
 	});
 
 	// Code Related too navigation hover.
@@ -214,11 +240,11 @@ $(document).ready(function() {
 	// Code Related to showing the slider button
 	$('.slider').hover(
 		function() {
-			$('.circle').toggleClass('visible');
+			$('.circle').toggleClass('on');
 			slideShowELem.stop();
 		},
 		function() {
-			$('.circle').toggleClass('visible');
+			$('.circle').toggleClass('on');
 			slideShowELem.start();
 		}
 	);

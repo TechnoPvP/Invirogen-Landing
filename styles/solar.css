@@ -77,7 +77,7 @@
 	transition: opacity 0.25s linear, background-color 0.25s linear;
 	transform: translateY(-50%, -50%);
 }
-.circle.visible {
+.circle.on {
 	opacity: 1;
 }
 /* .circle:hover {
@@ -120,11 +120,7 @@
 	.slider--I {
 		margin-bottom: 0;
 	}
-	.slide__small_image {
-		max-width: auto;
-		width: auto;
-		height: auto;
-	}
+
 	.circle {
 		width: 30px;
 		height: 30px;

@@ -1,7 +1,47 @@
-@import url('http://fonts.cdnfonts.com/css/century-gothic');
+/* @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;900&display=swap'); */
+
+@font-face {
+	font-family: 'gotham';
+	src: url('../assets/fonts/gotham-black-webfont.woff2') format('woff2'),
+		url('../assets/fonts/gotham-black-webfont.woff') format('woff');
+	font-weight: bolder;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'gotham';
+	src: url('../assets/fonts/gothambold-webfont.woff2') format('woff2'),
+		url('../assets/fonts/gothambold-webfont.woff') format('woff');
+	font-weight: bold;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'gotham';
+	src: url('../assets/fonts/gothambook-webfont.woff2') format('woff2'),
+		url('../assets/fonts/gothambook-webfont.woff') format('woff');
+	font-weight: 300;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'gotham';
+	src: url('../assets/fonts/gothamlight-webfont.woff2') format('woff2'),
+		url('../assets/fonts/gothamlight-webfont.woff') format('woff');
+	font-weight: 200;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'gotham';
+	src: url('../assets/fonts/gothammedium-webfont.woff2') format('woff2'),
+		url('../assets/fonts/gothammedium-webfont.woff') format('woff');
+	font-weight: medium;
+	font-style: normal;
+}
+
 :root {
 	--dark-gray: #393c41;
-	--fw-book: 500;
 	--light-gray: #f4f4f4;
 	--primary: #2d67b2;
 	--heading-1: 2.857142857142857em;
@@ -11,6 +51,9 @@
 	--sub: 17px;
 	--body: 1em;
 	--border-radius: 20px;
+	--fw-body: 300;
+	--fw-heading: 400;
+	--fw-subheading: 400;
 }
 html,
 * {
@@ -28,31 +71,36 @@ body {
 	margin: 0;
 	padding: 0;
 }
+
 h1 {
 	font-size: var(--heading-1);
 	color: var(--dark-gray);
 }
+
 h2 {
 	font-size: var(--heading-2);
 	color: var(--dark-gray);
 }
+
 h4 {
 	font-size: var(--heading-4);
-	font-weight: 700;
+	font-weight: var(--fw-heading);
 	color: var(--dark-gray);
 }
+
 p {
 	font-size: var(--body);
-	font-weight: var(--fw-book);
-	line-height: 170%;
+	font-weight: var(--fw-body);
+	line-height: 2;
 	color: var(--dark-gray);
 }
+
 body {
 	/* font-size: calc(14px + (26 - 14) * ((100vw - 300px) / (1600 - 300))); */
 	font-size: 0.9rem;
 	height: 100%;
 	width: 100%;
-	font-family: 'Raleway', sans-serif;
+	font-family: 'gotham', sans-serif;
 	color: var(--dark-gray);
 	overflow: hidden;
 }
@@ -77,6 +125,7 @@ a {
 	position: relative;
 	justify-content: space-between;
 }
+
 .nav__ol {
 	display: inline-flex;
 	margin: 0;
@@ -88,6 +137,7 @@ a {
 	transition: width 0.35s linear;
 	list-style-type: none;
 }
+
 .logo__img {
 	width: 100%;
 	height: 100%;
@@ -97,13 +147,16 @@ a {
 .logo {
 	max-width: 150px;
 }
+
 .nav__li {
 	transition: background-color 0.5s ease-out;
 	font-size: 14px;
 }
+
 .nav__a span {
 	position: relative;
 }
+
 .nav__a {
 	position: relative;
 	width: 120px;
@@ -116,6 +169,7 @@ a {
 	height: 100%;
 	z-index: 10;
 }
+
 .nav__underline {
 	height: 2px;
 	width: 100%;
@@ -126,15 +180,6 @@ a {
 	left: 0;
 
 	animation: slide_underline 0.35s linear;
-}
-
-@keyframes slide_underline {
-	from {
-		width: 0%;
-	}
-	to {
-		width: 100%;
-	}
 }
 
 /* Overlay CSS */
@@ -169,22 +214,23 @@ a {
 /* Sidebar Menu In Navigation */
 .sidebar {
 	position: absolute;
-	right: -300px;
+	right: 0;
 	top: 0;
 	z-index: 9;
-	width: 300px;
+	width: 0px;
 	height: 100%;
-	display: none;
+	/* display: none; */
+	/* opacity: 0; */
 	background-color: white;
-
-	padding: 70px 30px;
-
-	/* transition: right 0.25s linear; */
+	transition: width 0.35s linear;
+}
+.sidebar.active {
+	width: 350px;
 }
 .sidebar > ol {
+	margin: 70px 30px;
 	list-style-type: none;
 	padding: 0;
-	margin: 0;
 }
 .sidebar__li {
 	margin: 10px 0px;
@@ -350,6 +396,18 @@ a {
 	left: 30px;
 }
 
+textarea,
+input.text,
+input[type="text"],
+input[type="button"],
+input[type="submit"],
+[type=”email”],
+[type=”tel”],
+[type=”number”],
+.input-checkbox {
+	-webkit-appearance: none;
+}
+
 /* Text Related Css */
 .text__footer {
 	color: var(--dark-gray);
@@ -399,16 +457,14 @@ a {
 	.flex {
 		flex-direction: column;
 	}
+
 	.flex__col {
 		width: auto;
+		/* border: 5px solid black; */
 		height: 40%;
 	}
 	.price {
 		display: none;
 		background-color: white;
-	}
-	.form {
-		/* margin-bottom: 2em; */
-		/* flex-grow: 1; */
 	}
 }
