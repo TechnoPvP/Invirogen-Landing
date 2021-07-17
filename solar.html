@@ -18,10 +18,31 @@
 </head>
 
 <body>
+
     <div class="blur-overlay"></div>
+    <!-- <div class="sidebar">
+        <ol>
+            <li class="sidebar__li"> <a href="/solar.html">Solar</a> </li>
+            <li class="sidebar__li"> <a href="/versailles.html">Versailles</a> </li>
+            <li class="sidebar__li sidebar__li-bottom"> <a href="">Login</a> </li>
+            <div class="sidebar__footer"><span class="text__footer">Invirogen LLC. © 2021</span></div>
+        </ol>
+    </div> -->
+    <div class="mhelper">
+        <div class="mhelper__items-wrapper ">
+            <div class="mhelper__item"></div>
+            <div class="mhelper__item"></div>
+            <div class="mhelper__item"></div>
+        </div>
+        <div class="mhelper__button">
+            <div class="mhelper__circle"></div>
+            <div class="mhelper__circle"></div>
+            <div class="mhelper__circle"></div>
+        </div>
+    </div>
     <nav class="nav">
         <div id="overlay"></div>
-        <a class="logo" href="#"><img class="logo__img" src="assets/inviro_logo.png"
+        <a href="/versailles.html"><img class="logo" src="assets/inviro_logo.png"
                 alt="Invirogen logo written in all black"></a>
         <ol class="nav__ol">
             <li class="nav__li"><a class="nav__a" href="/solar.html"><span>Solar <div class="nav__underline"></div>
@@ -40,17 +61,6 @@
             <span></span>
         </div>
     </nav>
-    <!-- <div id="nav"></div> -->
-    <div class="sidebar">
-        <ol>
-            <!-- <li class="sidebar__li"> <a href="#">Products</a> </li> -->
-            <!-- <li class="sidebar__li"> <a href="#">Reserve</a> </li> -->
-            <li class="sidebar__li"> <a href="/solar.html">Solar</a> </li>
-            <li class="sidebar__li"> <a href="/versailles.html">Versailles</a> </li>
-            <li class="sidebar__li sidebar__li-bottom"> <a href="">Login</a> </li>
-        </ol>
-        <div class="sidebar__footer"><span class="text__footer">Invirogen LLC. © 2021</span></div>
-    </div>
 
     <div class="flex">
         <div class="slider">
@@ -58,8 +68,6 @@
             <div class="slide"><img src="/assets/solar/Solar Panel Roof Beauty Shot.jpg"></div>
             <div class="slide"><img src="/assets/solar/Florida Home WIth Solar Panels On Roof.jpg"></div>
             <div class="slide"><img src="/assets/solar/Photo Of Man Installing Solar Panels.jpg"></div>
-            <div class="slide"><img src="/assets/solar/Backyard With Solar Installed On Modern Home.jpg"></div>
-            <div class="slide"><img src="/assets/solar/Solar Panels Invirogen.jpg"></div>
             <div class="dots"></div>
             <button class="circle circle-next">
                 <div class="arrow arrow-right"></div>
@@ -69,27 +77,90 @@
             </button>
             <div class="dark-overlay"></div>
         </div>
+
+        <!-- 
+        ================================
+                    Form 1
+        ===================================
+        -->
         <div id="solar-form-1" class="flex__col active">
+            <span id="tooltip--faq" class='tooltip tooltip--btm-right'> FAQ</span>
             <h4 class="flex__col__h4">Your Home. Your Energy</h4>
-            <p>Free no-obligation quotes. Local installers with $0 down solar installation. See if
-                you qualify in
-                minutes.</p>
+            <p>
+                We provide solar solutions guaranteed to increase value, maximize savings and powered by clean renewable
+                energy.
+            </p>
+            <br>
+            <p>
+                Our team of experts will assist you with the highest quality of products and services designed to meet
+                your needs.<br><br>
+                Let us start by providing you with a <b>Free No-Obligation Quote.</b>
+            </p>
+
             <form class="form">
                 <div class="form__wrap">
-                    <label for="address">Home Address</label>
+                    <label for="phone">Are you interested in solar for a resideintal or commerical
+                        property?</label>
+                    <div class="switch">
+                        <input class="switch-input" type="checkbox" />
+                        <span class="switch__first">Residential</span>
+                        <span class="switch__second">Commerical</span>
+                        <div class="switch-handle"></div>
+                    </div>
+                </div>
+
+                <div class="form__wrap">
+                    <label for="phone">Do you own the property where solar will be
+                        installed?</label>
+                    <input class="checkbox" type="checkbox" name="phone" />
+                </div>
+
+
+                <div class="form__wrap">
+                    <label for="address">Property Address <i style="font-weight: normal">(Installation)</i> </label>
                     <input id="autocomplete" class="input" type="text" name="address" autocomplete="off" />
                 </div>
+
+                <input type="submit" value="Next" class="button button-action">
+            </form>
+            <!-- <div class="flex__details"><a href="#" class="text__subheading">Details</a></div> -->
+        </div>
+
+        <!-- 
+        ================================
+                    Form 2
+        ===================================
+        -->
+        <div id="solar-form-1" class="flex__col">
+            <h4 class="flex__col__h4">Just the basics</h4>
+            <p style="font-weight: 400; font-family: sans; font-size: 16px">
+                We provide solar solutions guaranteed to increase value, maximize savings and powered by clean renewable
+                energy.
+            </p>
+            <form class="form">
+
+                <div class="form__wrap form__wrap--mgleft">
+                    <label for="phone">Will you be making any additional improvements to this property?</label>
+                    <input id="toggle" class="checkbox" type="checkbox" name="phone" />
+                </div>
+
                 <div class="form__wrap">
-                    <label for="address">Average Electric Bill</label>
+                    <label class="form__label" for="address">Average Electric Payment</label>
                     <input class="input" type="text" name="electric_bill" />
                     <div class="form__placeholder">/ mo</div>
                 </div>
 
-                <input type="submit" value="Next" id="solar-next-button" class="button button-action" disabled>
+
+                <input type="submit" value="Next" class="button button-action">
             </form>
             <!-- <div class="flex__details"><a href="#" class="text__subheading">Details</a></div> -->
         </div>
-        <!-- Other Form -->
+
+        <!-- 
+        ================================
+                    Form 3
+        ===================================
+        -->
         <div id="solar-form-2" class="flex__col">
             <h4 class="flex__col__h4">Who is this quote for?</h4>
             <p>We know going solar can be complicated. We are here as your expert guide every step of the way.</p>
@@ -106,18 +177,180 @@
                     </div>
                 </div>
                 <div class="form__wrap">
-                    <label for="phone">Phone Number</label>
+                    <label class="form__label" for="phone">Phone Number</label>
                     <input class="input" type="tel" name="phone" />
                 </div>
 
                 <div class="form__wrap">
-                    <label for="email">Email</label>
+                    <label class="form__label" for="email">Email</label>
                     <input class="input" type="email" name="email" />
                 </div>
 
-                <input class="button button-action" type="submit" value="Submit" disabled>
-            </form>
+                <div class="form__wrap form__wrap--mgleft">
+                    <label for="phone">Is their a different billing address?</label>
+                    <!-- <input id="toggle" class="checkbox" type="checkbox" name="phone" /> -->
+                    <div class="circle-box"></div>
+                </div>
+
+                <div id="form__billing" class="form__wrap form__wrap--hidden">
+                    <label for="address">Billing Address </label>
+                    <input id="autocomplete" class="input " type="text" name="address" autocomplete="off" />
+                </div>
+
+                <div class="form__wrap form__wrap--inline form__wrap--mgleft">
+                    <input type="checkbox" name="terms_agreed" autocomplete="off" required />
+                    <label style="display: inline;" for="address">I agree to the Invirogen <span id="tooltip--terms"
+                            class="tooltip" href="#">Terms and Condtions
+                </div>
+                </label>
+                <input class="button button-action" type="submit" value="Submit">
         </div>
+        </form>
+    </div>
+    </div>
+    <div id="popup--faq" class="popup">
+        <div class="popup__x"></div>
+        <div class="acord">
+            <div class="acord__tab">
+                <div class="acord__plus">
+                    <div class="acord__horline"></div>
+                    <div class="acord__verline"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="popup--terms" class="popup">
+        <div class="popup__x"></div>
+        <p>
+            <span class="popup__title">Terms & Conditions</span>
+            The security of your information is important to us. <b>We do not sell your personal information for any
+                purpose or period.</b> <br /> <br /> Federal law requires this consent to be provided to you. We are
+            unable to
+            use or
+            disclose
+            your information without your consent. By agreeing to the terms and conditions, your consent allows
+            Invirogen to use & disclose the information we collect to our partners and affiliates. This allows us to
+            provide the products and services offered.
+        </p>
+        <p>
+            <span class="popup__title">Use & Disclosure</span>
+            We may share your information with:<br /> <br />
+            (1) Our service providers and business partners when necessary to provide you products and/or perform
+            services on our or on your behalf<br />
+            (2) Third parties you authorize<br />
+            (3) Other third parties as required by law<br />
+        </p>
+        <p> <i>Examples of when we may share your information include, payment processing, order fulfillment, product
+                installation, customer service, marketing, financing, service or repair, and other similar services</i>
+        </p>
+        <p>
+            <span class="popup__title">Service Providers & Business Partners</span>
+            We may share information with our service providers, business partners or affiliates (companies that are
+            owned or controlled by Invirogen, LLC. and companies in which Invirogen, LLC. has a substantial ownership
+            interest) when necessary to perform services on our or on your behalf, such as in the following:
+        <ul>
+            <li>With our third party service providers and channel partners to provide services such as website hosting,
+                data analysis and storage, payment processing, order fulfillment and product installation, wireless
+                connectivity to Invirogen products, information technology and related infrastructure, customer service,
+                product design, product diagnostics, maintenance or related services, email delivery, credit card
+                processing, auditing, marketing, voice command processing, and other similar services.</li>
+            <li>With repair estimate providers and any insurance company to enable Invirogen or third party service
+                center or providers to perform services such as repair or maintenance. When you request Invirogen to
+                perform certain services, we share limited information about you with these parties to help provide you
+                with an accurate estimates and to facilitate payments. Providers may use this information in the
+                aggregate to create and publish industry analytics.</li>
+            <li>With other third party business partners to the extent that they are involved in the purchase, lease, or
+                service of your Invirogen products. We share limited information from or about you or your Invirogen
+                products to allow you to take advantage of those services if you elect to utilize them, with such
+                partners as finance institutions, leasing, registration, title companies, electric utilities, permitting
+                authorities and insurance companies.</li>
+        </ul>
+        </p>
+        <p>
+            <span class="popup__title">With third parties you authorize</span>
+            We may share information with other third parties you authorize, such as in the following circumstances:
+        <ul>
+            <li>With our certified installers, where we do not directly sell you the energy products that you have
+                requested.</li>
+            <li>With third party utilities or energy services companies, where you have agreed to allow them to monitor
+                or control your energy product.</li>
+            <li>With third party service centers or providers, if you choose to utilize them. Note that some information
+                about you is stored on certain Invirogen products and may be accessible directly to the third party
+                service centers or providers that you choose to utilize to diagnose or service your Invirogen product.
+            </li>
+            <li>With third-party sponsors of contests and similar promotions, if you elect to participate.</li>
+            <li>With your social media account provider, if you connect your Invirogen Account and your social media
+                account. If you do so, you authorize us to share information with your social media account provider and
+                you understand that the use of the information we share will be governed by the social media account
+                provider’s privacy policy.</li>
+        </ul>
+        </p>
+        <p>We do not share information that personally identifies you with unaffiliated third parties for their
+            marketing purposes unless you opt in to that sharing. If you wish to opt out of any processing of
+            information for which you have provided your prior explicit opt-in consent, you may do so by contacting us
+            as indicated in the “How to contact us” section below.</p>
+        <p>
+            <span class="popup__title">With other third parties when required by law or other circumstances</span>
+            nvirogen may transfer and disclose information, including information that may or may not personally
+            identify you, to third parties to comply with a legal obligation (including, but not limited to, subpoenas
+            or other court orders); when we believe in good faith that the law requires it; in response to a lawful
+            request by governmental authorities conducting an investigation, including to comply with law enforcement
+            requirements; to verify or enforce our policies and procedures; to respond to an emergency; to prevent or
+            stop activity we may consider to be, or to pose a risk of being, illegal, unethical or legally actionable;
+            or to protect the rights, property, safety, or security of our products and services, Invirogen, third
+            parties, visitors, or the public, as determined by us in our sole discretion.
+        </p>
+
+        <span class="popup__title">Invirogen Intellectual Property</span>
+        <p>
+            <span class="popup__title">Copyrights</span>
+            Copyright 2002-2021 Invirogen, LLC. All Rights Reserved. The text, images, graphics, sound files, animation
+            files, video files and their arrangement on Invirogen, LLC. internet sites are all subject to copyright and
+            other intellectual property protection. These objects may not be copied for commercial use or distribution,
+            nor may these objects be modified or reposted. Some Invirogen, LLC. internet sites also contain material
+            that is subject to the copyright rights of their providers.
+        </p>
+        <p>
+            <span class="popup__title">Prices</span>
+            All prices specified are recommended retail prices. Prices are current at the time of publication and
+            subject to change without notice.
+        </p>
+        <p>
+            <span class="popup__title">Trademarks</span>
+            Unless otherwise indicated, all marks displayed on Invirogen, LLC. internet sites are subject to the
+            trademark rights of Invirogen, LLC., including, but not limited to, model names, corporate logos and
+            emblems.
+        </p>
+        <p>
+            <span class="popup__title">No Licenses</span>
+            Invirogen, LLC. strives to achieve innovative and informative internet sites. Invirogen, LLC. Invirogen,
+            LLC, must protect its intellectual property, including its patents, trademarks and copyrights. Accordingly,
+            please be on notice that neither these internet sites, nor any material contained therein shall in any way
+            grant or be taken to grant any person a license to Invirogen, LLC.'s intellectual property.
+        </p>
+        <p>
+            <span class="popup__title">Cautions Regarding Forward-Looking Statements</span>
+            Internet pages, investor relations releases, outlooks, presentations, audio and video files of events (live
+            or recorded) and other documents on these internet sites contain among other things forward-looking
+            statements that reflect management's current views with respect to future events. The words "anticipate",
+            "assume", "believe", "estimate", "expect", "intend", "may", "plan", "project" and "should" and similar
+            expressions identify forward-looking statements. Such statements are subject to risks and uncertainties,
+            including, but not limited to: changes in currency exchange rates, interest rates and in raw material
+            prices; introduction of competing products; increased sales incentives; and decline in resale prices of used
+            vehicles.
+        </p>
+        <p>
+            <span class="popup__title">No Warranties Or Representations</span>
+            THE INFORMATION ON THESE INTERNET SITES IS PROVIDED BY INVIROGEN, LLC. "AS IS" AND TO THE EXTENT PERMITTED
+            BY LAW, IS PROVIDED WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY
+            IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR ANY PARTICULAR PURPOSE, OR NON INFRINGEMENT. WHILE THE
+            INFORMATION PROVIDED IS BELIEVED TO BE ACCURATE, IT MAY INCLUDE ERRORS OR INACCURACIES.
+            THESE INTERNET SITES MAY CONTAIN LINKS TO EXTERNAL SITES WHICH ARE NOT UNDER THE CONTROL OF INVIROGEN, LLC.
+            THEREFORE WE ARE NOT RESPONSIBLE FOR THE CONTENT OF ANY LINKED SITE. INVIROGEN, LLC. IS PROVIDING THESE
+            LINKS TO YOU ONLY AS A CONVENIENCE, AND THE INCLUSION OF ANY LINK DOES NOT IMPLY ENDORSEMENT BY INVIROGEN,
+            LLC. OF THE LINKED SITE.
+
+        </p>
     </div>
 </body>
 
