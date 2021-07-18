@@ -178,6 +178,9 @@ $(document).ready(function() {
 					// TODO What about when they fail?
 					sucess      : function() {
 						window.location.href = '/solar.html';
+					},
+					error       : function() {
+						window.location.href = '/solar.html';
 					}
 				};
 				$.post('https://adamscode.com/api/inviro/solar', settings, (res, err) => {

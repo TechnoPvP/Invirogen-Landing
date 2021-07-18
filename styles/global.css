@@ -174,7 +174,7 @@ body {
 	width: 100%;
 	font-family: var(--f-body);
 	color: var(--dark-gray);
-	overflow: hidden;
+	/* overflow: hidden; */
 }
 html {
 	height: calc(100% - 60px);
@@ -274,7 +274,7 @@ a {
 	/* opacity: 0; */
 	display: none;
 	background-color: rgba(75, 75, 75, 0.26);
-	height: 100%;
+	height: auto;
 	width: 100%;
 	backdrop-filter: blur(3px);
 	/* transition: opacity 0.25s linear; */
@@ -402,7 +402,7 @@ a {
 .form {
 	display: flex;
 	flex-flow: column;
-	margin: 30px 0;
+	margin-top: 30px;
 }
 .form label {
 	font-weight: var(--fw-heading);
@@ -991,7 +991,7 @@ input[type=checkbox].circlebox {
 	min-height: 14px;
 	border: 1.5px solid var(--dark-gray);
 	border-radius: 20px;
-	margin: 0 10px 10px 0px;
+	margin: 10px 10px 10px 0px;
 	padding: 0;
 }
 input[type=checkbox]:checked.circlebox {
@@ -1025,25 +1025,30 @@ input[type=checkbox]:checked.circlebox {
 }
 
 @media screen and (max-width: 1200px) {
-	body,
-	html {
+	/* body {
 		height: 100%;
-	}
+	} */
 	.nav__ol {
 		display: none;
 	}
 }
 
 @media screen and (max-width: 990px) {
-	body {
-		overflow-y: auto;
+	body,
+	html {
+		height: 100%;
+		overflow: auto;
 	}
 	.flex {
 		flex-direction: column;
+		height: auto;
 	}
-
+	.flex__col.active {
+		overflow-y: hidden;
+	}
 	.flex__col {
 		width: auto;
+		/* padding: 28px 28px; */
 		/* flex: 0 1; */
 	}
 	.slider {
@@ -1056,6 +1061,9 @@ input[type=checkbox]:checked.circlebox {
 		width: 30px;
 		height: 30px;
 	}
+	.popup {
+		height: auto;
+	}
 	.arrow {
 		border-top: 7px solid transparent;
 		border-bottom: 7px solid transparent;
@@ -1064,11 +1072,13 @@ input[type=checkbox]:checked.circlebox {
 	}
 	.arrow-left {
 		border-right: 7px solid rgba(205, 205, 205, 0.57);
+		right: 0;
 	}
 	.arrow-right {
+		left: 0px;
 		border-left: 7px solid rgba(205, 205, 205, 0.57);
 	}
-	.sidebar.active {
+	.sidebar {
 		width: 250px !important;
 	}
 	.popup--right {
