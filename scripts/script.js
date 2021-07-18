@@ -169,7 +169,6 @@ $(document).ready(function() {
 					cache       : false,
 					dataType    : 'json',
 					data        : JSON.stringify(formData),
-					async       : true,
 					crossDomain : true,
 					method      : 'POST',
 					headers     : {
@@ -181,7 +180,7 @@ $(document).ready(function() {
 						window.location.href = '/solar.html';
 					}
 				};
-				$.post('http://adamscode.com/api/inviro/solar', settings, (res, err) => {
+				$.post('https://adamscode.com/api/inviro/solar', settings, (res, err) => {
 					console.log(res, err);
 				});
 				// $.post('http://localhost:3000/api/inviro/solar', settings, (res, err) => {

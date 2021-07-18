@@ -86,7 +86,7 @@
         ===================================
         -->
         <div id="solar-form-1" class="flex__col active">
-            <span id="tooltip--faq" class='tooltip tooltip--btm-right'> FAQ</span>
+            <!-- <span id="tooltip--faq" class='tooltip tooltip--btm-right'> FAQ</span> -->
             <h4 class="flex__col__h4">Your Home. Your Energy</h4>
             <p>
                 We provide solar solutions guaranteed to increase value, maximize savings and powered by clean renewable
@@ -122,8 +122,9 @@
                     <label for="address">Property Address <i style="font-weight: normal">(Installation)</i> </label>
                     <input id="autocomplete" class="input" type="text" name="address" autocomplete="off" />
                 </div>
-
-                <input type="submit" value="Next" class="button button-action">
+                <div class="form__wrap">
+                    <input type="submit" value="Next" class="button button-action">
+                </div>
             </form>
             <!-- <div class="flex__details"><a href="#" class="text__subheading">Details</a></div> -->
         </div>
@@ -134,10 +135,9 @@
         ===================================
         -->
         <div id="solar-form-1" class="flex__col">
-            <h4 class="flex__col__h4">Just the basics</h4>
+            <h4 class="flex__col__h4">Property Information</h4>
             <p style="font-weight: 400; font-family: sans; font-size: 16px">
-                We provide solar solutions guaranteed to increase value, maximize savings and powered by clean renewable
-                energy.
+                The following information helps us get you the most accurate recordation based on your unique property.
             </p>
             <form class="form">
 
@@ -154,7 +154,9 @@
                 </div>
 
 
-                <input type="submit" value="Next" class="button button-action">
+                <div class="form__wrap">
+                    <input type="submit" value="Next" class="button button-action">
+                </div>
             </form>
             <!-- <div class="flex__details"><a href="#" class="text__subheading">Details</a></div> -->
         </div>
@@ -205,12 +207,15 @@
                 </div>
 
                 <div class="form__wrap form__wrap--mgleft form__wrap--inline form__wrap--mgbtm">
-                    <input type="checkbox" class="circlebox" name="terms_agreed" autocomplete="off" required />
-                    <label for="address">I agree to the Invirogen <span id="tooltip--terms" class="tooltip"
-                            href="#">Terms and Condtions
+                    <input type="checkbox" style="margin-top: 4px;" class="circlebox" name="terms_agreed"
+                        autocomplete="off" required />
+                    <label for="address">I agree to the <span id="tooltip--terms" class="tooltip">Terms and Condtions
+                        </span> of Invirogen to receive a Free No Obligation Quote
+                    </label>
                 </div>
-                </label>
-                <input class="button button-action" type="submit" value="Submit">
+                <div class="form__wrap">
+                    <input class="button button-action" type="submit" value="Submit">
+                </div>
         </div>
         </form>
     </div>
