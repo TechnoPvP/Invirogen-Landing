@@ -3,28 +3,40 @@ $(document).ready(function() {
 
 	// TODO We can do this even better.
 	SidebarWidget = {
-		settings      : {
+		settings        : {
 			sidebar     : $('.sidebar'),
 			hamburger   : $('#hamburger'),
 			blurOverlay : $('.blur-overlay')
 		},
-		init          : function() {
+		init            : function() {
 			this.bindUI();
 			console.log('Loaded sidebar widget');
 		},
 
-		bindUI        : function() {
+		bindUI          : function() {
 			$('#hamburger').on('click', function() {
 				SidebarWidget.toggleSidebar();
 			});
+			this.settings.blurOverlay.on('click', () => {
+				Popup().closePopup();
+				this.closeSidebar();
+			});
 		},
-		toggleBlur    : function() {
-			this.settings.blurOverlay.toggleClass('active');
+		toggleBlur      : function() {
+			this.settings.blurOverlay.fadeToggle();
 		},
-		toggleSidebar : function() {
-			SidebarWidget.settings.sidebar.toggleClass('active');
+		toggleHamburger : function() {
+			this.settings.hamburger.fadeToggle();
+		},
+		toggleSidebar   : function() {
+			// SidebarWidget.settings.sidebar.toggleClass('active');
+			this.settings.sidebar.fadeToggle();
 			this.toggleBlur();
 			this.settings.hamburger.toggleClass('open');
+		},
+		closeSidebar    : function() {
+			this.settings.sidebar.fadeOut();
+			this.settings.hamburger.removeClass('open');
 		}
 	};
 
@@ -51,7 +63,7 @@ $(document).ready(function() {
 				s.form.on('input', function() {
 					// FormWidget.checkForm();
 				});
-				$('.circle-box').click(function() {
+				$('#billing--reveal').click(function() {
 					FormWidget.toggleBillingAddress();
 				});
 
@@ -83,7 +95,7 @@ $(document).ready(function() {
 			},
 
 			toggleNextForm       : function() {
-				// FormWidget.saveData();
+				FormWidget.saveData();
 
 				this.getCurrentForm().toggleClass('active');
 				this.getNextForm().toggleClass('active');
@@ -97,10 +109,12 @@ $(document).ready(function() {
 					$(elem).on('submit', function(e) {
 						e.preventDefault();
 
-						const button = $(elem).find('input[type=submit]:focus');
-
-						console.log(button.val());
-						FormWidget.toggleNextForm();
+						const buttonValue = $(elem).find('input[type=submit]:focus').val();
+						if (buttonValue == 'Submit') {
+							FormWidget.submitData($(e.target));
+						} else {
+							FormWidget.toggleNextForm();
+						}
 					});
 				});
 			},
@@ -117,15 +131,62 @@ $(document).ready(function() {
 					FormWidget.setButtonDisabled(false);
 				});
 			},
-
 			saveData             : function() {
-				s.visibleForm.find('.input').each(function(index, elem) {
-					const inputElements = $(elem);
-
-					if (inputElements.val() != null && inputElements.val() != undefined) {
-						window.localStorage.setItem(inputElements.attr('name'), inputElements.val());
+				this.getCurrentForm().find('input').each(function(index, elem) {
+					const inputVal = $(elem).val();
+					const inputElement = $(elem);
+					if (inputVal != null && inputVal != undefined && $(elem).attr('type') != 'submit') {
+						if (inputElement.attr('name') === 'property_type') {
+							window.localStorage.setItem(
+								inputElement.attr('name'),
+								inputElement.prop('checked') ? 'commercial' : 'residential'
+							);
+						} else {
+							window.localStorage.setItem(
+								inputElement.attr('name'),
+								inputElement.is(':checkbox') ? inputElement.prop('checked') : inputVal
+							);
+						}
 					}
 				});
+			},
+			submitData           : function(target) {
+				// const testData = {
+				// 	electric_bill          : 190,
+				// 	addtional_improvements : true,
+				// 	own_property           : true,
+				// 	property_type          : 'commerical',
+				// 	address                : '1020 Property Adddress'
+				// };
+
+				const formData = { ...localStorage };
+				const lastFormData = target.serializeArray();
+				lastFormData.forEach((elem) => {
+					formData[elem.name] = elem.value;
+				});
+
+				var settings = {
+					cache       : false,
+					dataType    : 'json',
+					data        : JSON.stringify(formData),
+					async       : true,
+					crossDomain : true,
+					method      : 'POST',
+					headers     : {
+						accept                        : 'application/json',
+						'Access-Control-Allow-Origin' : '*'
+					},
+					// TODO What about when they fail?
+					sucess      : function() {
+						window.location.href = '/solar.html';
+					}
+				};
+				$.post('http://adamscode.com/api/inviro/solar', settings, (res, err) => {
+					console.log(res, err);
+				});
+				// $.post('http://localhost:3000/api/inviro/solar', settings, (res, err) => {
+				// 	console.log(res, err);
+				// });
 			}
 		};
 
@@ -354,7 +415,7 @@ $(document).ready(function() {
 			},
 			closePopup  : function() {
 				se.popupElement.removeClass('active');
-				SidebarWidget.settings.blurOverlay.removeClass('active');
+				SidebarWidget.toggleBlur();
 			},
 			getPopup    : function(name) {
 				const popupElem = $(`#popup--${name}`);
@@ -366,9 +427,6 @@ $(document).ready(function() {
 				se.tooltip.click((e) => {
 					const clickedTooltipName = e.target.id.split('--')[1];
 					this.togglePopup(clickedTooltipName);
-				});
-				SidebarWidget.settings.blurOverlay.on('click', () => {
-					this.closePopup();
 				});
 				se.exitElement.on('click', () => {
 					this.closePopup();

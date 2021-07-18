@@ -20,15 +20,17 @@
 <body>
 
     <div class="blur-overlay"></div>
-    <!-- <div class="sidebar">
-        <ol>
-            <li class="sidebar__li"> <a href="/solar.html">Solar</a> </li>
-            <li class="sidebar__li"> <a href="/versailles.html">Versailles</a> </li>
-            <li class="sidebar__li sidebar__li-bottom"> <a href="">Login</a> </li>
-            <div class="sidebar__footer"><span class="text__footer">Invirogen LLC. © 2021</span></div>
-        </ol>
-    </div> -->
-    <div class="mhelper">
+    <div class="sidebar-container">
+        <div class="sidebar">
+            <ol>
+                <li class="sidebar__li"> <a href="/solar.html">Solar</a> </li>
+                <li class="sidebar__li"> <a href="/versailles.html">Versailles</a> </li>
+                <li class="sidebar__li sidebar__li-bottom"> <a href="">Login</a> </li>
+                <div class="sidebar__footer"><span class="text__footer">Invirogen LLC. © 2021</span></div>
+            </ol>
+        </div>
+    </div>
+    <!-- <div class="mhelper">
         <div class="mhelper__items-wrapper ">
             <div class="mhelper__item"></div>
             <div class="mhelper__item"></div>
@@ -39,7 +41,7 @@
             <div class="mhelper__circle"></div>
             <div class="mhelper__circle"></div>
         </div>
-    </div>
+    </div> -->
     <nav class="nav">
         <div id="overlay"></div>
         <a href="/versailles.html"><img class="logo" src="assets/inviro_logo.png"
@@ -99,10 +101,10 @@
 
             <form class="form">
                 <div class="form__wrap">
-                    <label for="phone">Are you interested in solar for a resideintal or commerical
+                    <label for="property_type">Are you interested in solar for a resideintal or commerical
                         property?</label>
                     <div class="switch">
-                        <input class="switch-input" type="checkbox" />
+                        <input class="switch-input" type="checkbox" name="property_type" />
                         <span class="switch__first">Residential</span>
                         <span class="switch__second">Commerical</span>
                         <div class="switch-handle"></div>
@@ -110,9 +112,9 @@
                 </div>
 
                 <div class="form__wrap">
-                    <label for="phone">Do you own the property where solar will be
+                    <label for="own_property">Do you own the property where solar will be
                         installed?</label>
-                    <input class="checkbox" type="checkbox" name="phone" />
+                    <input class="circlebox" type="checkbox" name="own_property" />
                 </div>
 
 
@@ -140,8 +142,9 @@
             <form class="form">
 
                 <div class="form__wrap form__wrap--mgleft">
-                    <label for="phone">Will you be making any additional improvements to this property?</label>
-                    <input id="toggle" class="checkbox" type="checkbox" name="phone" />
+                    <label for="addtional_improvements">Will you be making any additional improvements to this
+                        property?</label>
+                    <input id="toggle" class="circlebox" type="checkbox" name="addtional_improvements" />
                 </div>
 
                 <div class="form__wrap">
@@ -186,21 +189,25 @@
                     <input class="input" type="email" name="email" />
                 </div>
 
-                <div class="form__wrap form__wrap--mgleft">
+                <!-- <div class="form__wrap form__wrap--mgleft">
                     <label for="phone">Is their a different billing address?</label>
-                    <!-- <input id="toggle" class="checkbox" type="checkbox" name="phone" /> -->
                     <div class="circle-box"></div>
+                </div> -->
+
+                <div class="form__wrap form__wrap--mgleft form__wrap--mgbtm">
+                    <label for="phone" style="margin-bottom: 15px;">Is their a different billing address?</label>
+                    <input class="circlebox" type="checkbox" name="billing" id="billing--reveal">
                 </div>
 
                 <div id="form__billing" class="form__wrap form__wrap--hidden">
                     <label for="address">Billing Address </label>
-                    <input id="autocomplete" class="input " type="text" name="address" autocomplete="off" />
+                    <input id="autocomplete" class="input " type="text" name="billing_address" autocomplete="off" />
                 </div>
 
-                <div class="form__wrap form__wrap--inline form__wrap--mgleft">
-                    <input type="checkbox" name="terms_agreed" autocomplete="off" required />
-                    <label style="display: inline;" for="address">I agree to the Invirogen <span id="tooltip--terms"
-                            class="tooltip" href="#">Terms and Condtions
+                <div class="form__wrap form__wrap--mgleft form__wrap--inline form__wrap--mgbtm">
+                    <input type="checkbox" class="circlebox" name="terms_agreed" autocomplete="off" required />
+                    <label for="address">I agree to the Invirogen <span id="tooltip--terms" class="tooltip"
+                            href="#">Terms and Condtions
                 </div>
                 </label>
                 <input class="button button-action" type="submit" value="Submit">
@@ -219,7 +226,7 @@
             </div>
         </div>
     </div>
-    <div id="popup--terms" class="popup">
+    <div id="popup--terms" class="popup popup--right">
         <div class="popup__x"></div>
         <p>
             <span class="popup__title">Terms & Conditions</span>
