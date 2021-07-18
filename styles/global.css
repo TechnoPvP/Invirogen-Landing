@@ -274,7 +274,7 @@ a {
 	/* opacity: 0; */
 	display: none;
 	background-color: rgba(75, 75, 75, 0.26);
-	height: auto;
+	height: 100%;
 	width: 100%;
 	backdrop-filter: blur(3px);
 	/* transition: opacity 0.25s linear; */
@@ -1061,8 +1061,10 @@ input[type=checkbox]:checked.circlebox {
 		width: 30px;
 		height: 30px;
 	}
-	.popup {
-		height: auto;
+	div.popup {
+		top: 50%;
+		transform: translate(-50%, -50%);
+		height: 85%;
 	}
 	.arrow {
 		border-top: 7px solid transparent;
