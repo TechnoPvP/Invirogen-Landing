@@ -174,7 +174,8 @@
         -->
         <div id="solar-form-2" class="flex__col">
 
-            <p>Please provide the following information to send you a free no obligation quote</p>
+            <p>Please provide the following information to send you a <span class="text--boldblue">free no obligation
+                    quote</span></p>
             <form method="POST" name="solar" class="form">
                 <div class="form__wrap form__wrap-col">
                     <div class="form__wrap">
@@ -198,8 +199,13 @@
                 </div>
 
                 <div class="form__wrap form__wrap--mgleft form__wrap--mgbtm">
-                    <label for="phone">Is their a different billing/mailling address?</label>
-                    <input class="circlebox" type="checkbox" name="billing" id="billing--reveal">
+                    <label for="phone">Is their a different mailing/billing address?</label>
+                    <div class="radio__wrapper form__wrap--button ">
+                        <input class="radio" type="radio" name="addtional_improvements" />
+                        <label class="radio__span">Yes </label>
+                        <input class="radio" type="radio" name="addtional_improvements" />
+                        <label class="radio__span"> No</label>
+                    </div>
                 </div>
 
                 <div id="form__billing" class="form__wrap form__wrap--hidden">
