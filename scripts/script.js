@@ -109,7 +109,7 @@ $(document).ready(function() {
 					$(elem).on('submit', function(e) {
 						e.preventDefault();
 
-						const buttonValue = $(elem).find('input[type=submit]:focus').val();
+						const buttonValue = $(elem).find('input[type=submit]').val();
 						if (buttonValue == 'Submit') {
 							FormWidget.submitData($(e.target));
 						} else {
@@ -175,8 +175,8 @@ $(document).ready(function() {
 						accept                        : 'application/json',
 						'Access-Control-Allow-Origin' : '*'
 					},
-					sucess      : function() {
-						window.location.href = '/solar.html';
+					success     : function() {
+						window.location.replace(`${window.location.origin}/solar.html`);
 					},
 					error       : function() {
 						window.location.href = '/solar.html';
@@ -190,7 +190,7 @@ $(document).ready(function() {
 				// });
 			}
 		};
-
+	console.log(window.location.origin);
 	var s,
 		NavbarHover = {
 			settings     : {

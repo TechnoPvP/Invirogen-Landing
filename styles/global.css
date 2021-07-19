@@ -13,7 +13,7 @@
 	font-family: 'Century Gothic';
 	src: url('../assets/fonts/CenturyGothic.ttf') format('ttf');
 	font-weight: normal;
-	font-style: italic;
+	font-style: normal;
 }
 
 :root {
