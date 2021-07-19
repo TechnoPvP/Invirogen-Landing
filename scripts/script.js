@@ -169,6 +169,7 @@ $(document).ready(function() {
 					cache       : false,
 					dataType    : 'json',
 					data        : JSON.stringify(formData),
+					enctype     : 'mutipart/form-data',
 					crossDomain : true,
 					method      : 'POST',
 					headers     : {
