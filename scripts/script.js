@@ -56,12 +56,12 @@ $(document).ready(function() {
 				// console.log('Loaded FormWidget');
 				s = this.settings;
 				this.bindUI();
-				// this.checkForm();
+				this.checkForm();
 			},
 
 			bindUI               : function() {
 				s.form.on('input', function() {
-					// FormWidget.checkForm();
+					FormWidget.checkForm();
 				});
 				$('#billing--reveal').click(function() {
 					FormWidget.toggleBillingAddress();
@@ -101,7 +101,7 @@ $(document).ready(function() {
 				this.getNextForm().toggleClass('active');
 
 				// Check form inputs and set button disabled prop accordingly
-				// this.checkForm();
+				this.checkForm();
 			},
 
 			handleFormSubmission : function() {
@@ -120,10 +120,8 @@ $(document).ready(function() {
 			},
 
 			checkForm            : function() {
-				s.visibleForm = $('.form:visible');
-
-				s.visibleForm.find('.input').each(function(index, elem) {
-					if ($(elem).val().trim() <= 0) {
+				this.getCurrentForm().find('input').each(function(index, elem) {
+					if ($(elem).prop('required') && $(elem).val().trim() <= 0) {
 						FormWidget.setButtonDisabled(true);
 						return false;
 					}

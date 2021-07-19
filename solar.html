@@ -19,16 +19,18 @@
 <body>
 
     <div class="blur-overlay"></div>
-    <div class="sidebar-container">
-        <div class="sidebar">
+    <!-- <div class="sidebar-container"> -->
+    <div class="sidebar">
+        <div class="sidebar__flex">
             <ol>
                 <li class="sidebar__li"> <a href="/solar.html">Solar</a> </li>
                 <li class="sidebar__li"> <a href="/versailles.html">Versailles</a> </li>
                 <li class="sidebar__li sidebar__li-bottom"> <a href="">Login</a> </li>
-                <div class="sidebar__footer"><span class="text__footer">Invirogen LLC. © 2021</span></div>
+                <!-- <div class="sidebar__footer"><span class="text__footer">Invirogen LLC. © 2021</span></div> -->
             </ol>
         </div>
     </div>
+    <!-- </div> -->
     <!-- <div class="mhelper">
         <div class="mhelper__items-wrapper ">
             <div class="mhelper__item"></div>
@@ -124,10 +126,10 @@
 
                 <div class="form__wrap ">
                     <label for="address">Property Address <i style="font-weight: normal">(Installation)</i> </label>
-                    <input id="autocomplete" class="input" type="text" name="address" autocomplete="off" />
+                    <input id="autocomplete" class="input" type="text" name="address" autocomplete="off" required />
                 </div>
                 <div class="form__wrap form__wrap--button">
-                    <input type="submit" value="Next" class="button button-action">
+                    <input type="submit" value="Next" class="button button-action" disabled>
                 </div>
             </form>
             <!-- <div class="flex__details"><a href="#" class="text__subheading">Details</a></div> -->
@@ -145,18 +147,23 @@
                 <div class="form__wrap form__wrap--mgleft">
                     <label for="addtional_improvements">Will you be making any additional improvements to this
                         property?</label>
-                    <input id="toggle" class="circlebox" type="checkbox" name="addtional_improvements" />
+                    <div class="radio__wrapper form__wrap--button ">
+                        <input class="radio" type="radio" name="addtional_improvements" />
+                        <label class="radio__span">Yes </label>
+                        <input class="radio" type="radio" name="addtional_improvements" />
+                        <label class="radio__span"> No</label>
+                    </div>
                 </div>
 
                 <div class="form__wrap">
                     <label class="form__label" for="address">Average Electric Payment</label>
-                    <input class="input" type="text" name="electric_bill" />
+                    <input class="input" type="text" name="electric_bill" required />
                     <div class="form__placeholder">/ mo</div>
                 </div>
 
 
                 <div class="form__wrap form__wrap--button">
-                    <input type="submit" value="Next" class="button button-action">
+                    <input type="submit" value="Next" class="button button-action" disabled>
                 </div>
             </form>
             <!-- <div class="flex__details"><a href="#" class="text__subheading">Details</a></div> -->
@@ -174,12 +181,12 @@
                 <div class="form__wrap form__wrap-col">
                     <div class="form__wrap">
                         <label class="form__label" for="first">First Name</label>
-                        <input class="input" type="text" name="first" />
+                        <input class="input" type="text" name="first" required />
                     </div>
                     <div class="spacer"></div>
                     <div class="form__wrap">
                         <label class="form__label" for="last">Last Name</label>
-                        <input class="input" type="text" name="last" />
+                        <input class="input" type="text" name="last" required />
                     </div>
                 </div>
                 <div class="form__wrap">
@@ -189,7 +196,7 @@
 
                 <div class="form__wrap">
                     <label class="form__label" for="email">Email</label>
-                    <input class="input" type="email" name="email" />
+                    <input class="input" type="email" name="email" required />
                 </div>
 
                 <div class="form__wrap form__wrap--mgleft form__wrap--mgbtm">
@@ -210,7 +217,7 @@
                     </label>
                 </div>
                 <div class="form__wrap form__wrap--button">
-                    <input class="button button-action" type="submit" value="Submit">
+                    <input class="button button-action" type="submit" value="Submit" disabled>
                 </div>
         </div>
         </form>
