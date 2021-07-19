@@ -175,7 +175,6 @@ $(document).ready(function() {
 						accept                        : 'application/json',
 						'Access-Control-Allow-Origin' : '*'
 					},
-					// TODO What about when they fail?
 					sucess      : function() {
 						window.location.href = '/solar.html';
 					},

@@ -1,105 +1,4 @@
 /* @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;900&display=swap'); */
-/* 
-@font-face {
-	font-family: 'gotham';
-	src: url('../assets/fonts/gotham-black-webfont.woff2') format('woff2'),
-		url('../assets/fonts/gotham-black-webfont.woff') format('woff');
-	font-weight: bolder;
-	font-style: normal;
-}
-
-@font-face {
-	font-family: 'gotham';
-	src: url('../assets/fonts/gothambold-webfont.woff2') format('woff2'),
-		url('../assets/fonts/gothambold-webfont.woff') format('woff');
-	font-weight: bold;
-	font-style: normal;
-}
-
-@font-face {
-	font-family: 'gotham';
-	src: url('../assets/fonts/gothambook-webfont.woff2') format('woff2'),
-		url('../assets/fonts/gothambook-webfont.woff') format('woff');
-	font-weight: 300;
-	font-style: normal;
-}
-
-@font-face {
-	font-family: 'gotham';
-	src: url('../assets/fonts/gothamlight-webfont.woff2') format('woff2'),
-		url('../assets/fonts/gothamlight-webfont.woff') format('woff');
-	font-weight: 200;
-	font-style: normal;
-}
-
-@font-face {
-	font-family: 'gotham';
-	src: url('../assets/fonts/gothammedium-webfont.woff2') format('woff2'),
-		url('../assets/fonts/gothammedium-webfont.woff') format('woff');
-	font-weight: medium;
-	font-style: normal;
-} */
-
-/* IDK */
-/* @font-face {
-	font-family: 'sans';
-	src: url('../assets/fonts/sansserifexbflf-webfont.woff2') format('woff2'),
-		url('../assets/fonts/sansserifexbflf-webfont.woff') format('woff');
-	font-weight: 100;
-	font-style: normal;
-} */
-
-/* Also IDK */
-/* @font-face {
-	font-family: 'sans';
-	src: url('../assets/fonts/sansserifexbflfcond-webfont.woff2') format('woff2'),
-		url('../assets/fonts/sansserifexbflfcond-webfont.woff') format('woff');
-	font-weight: 200;
-	font-style: normal; 
-} */
-
-/* IDK */
-@font-face {
-	font-family: 'sans';
-	src: url('../assets/fonts/sansserifflf-webfont.woff2') format('woff2'),
-		url('../assets/fonts/sansserifflf-webfont.woff') format('woff');
-	font-weight: 300;
-	font-style: normal;
-}
-
-/* Demi Bold */
-@font-face {
-	font-family: 'sans';
-	src: url('../assets/fonts/sansserifflf-demibold-webfont.woff2') format('woff2'),
-		url('../assets/fonts/sansserifflf-demibold-webfont.woff') format('woff');
-	font-weight: 500;
-	font-style: normal;
-}
-
-/* @font-face {
-	font-family: 'sans';
-	src: url('../assets/fonts/sansserifbldflf-webfont.woff2') format('woff2'),
-		url('../assets/fonts/sansserifbldflf-webfont.woff') format('woff');
-	font-weight: 700;
-	font-style: normal;
-}
-
-@font-face {
-	font-family: 'sans';
-	src: url('../assets/fonts/sansserifbldflfcond-webfont.woff2') format('woff2'),
-		url('../assets/fonts/sansserifbldflfcond-webfont.woff') format('woff');
-	font-weight: 900;
-	font-style: normal;
-} */
-
-/* Normal */
-@font-face {
-	font-family: 'sans';
-	src: url('../assets/fonts/sansserifbookflf-webfont.woff2') format('woff2'),
-		url('../assets/fonts/sansserifbookflf-webfont.woff') format('woff');
-	font-weight: normal;
-	font-style: normal;
-}
 
 /* Italic */
 @font-face {
@@ -110,19 +9,29 @@
 	font-style: italic;
 }
 
-@import url('https://fonts.cdnfonts.com/css/century-gothic');
+@font-face {
+	font-family: 'Century Gothic';
+	src: url('../assets/fonts/CenturyGothic.ttf') format('ttf');
+	font-weight: normal;
+	font-style: italic;
+}
+
 :root {
 	--dark-gray: #393c41;
 	--light-gray: #f4f4f4;
 	--primary: #2d67b2;
+
 	--heading-1: 2.857142857142857em;
 	--heading-2: 34px;
 	--heading-3: 30px;
 	--heading-4: 2em;
+
 	--sub: 17px;
-	--f-body: 'Century Gothic';
 	--body: 1em;
+
 	--border-radius: 20px;
+
+	--f-body: 'Century Gothic', sans-serif;
 	--fw-body: 300;
 	--fw-heading: bold;
 	--fw-subheading: 400;
@@ -174,7 +83,7 @@ body {
 	width: 100%;
 	font-family: var(--f-body);
 	color: var(--dark-gray);
-	/* overflow: hidden; */
+	overflow: hidden;
 }
 html {
 	height: calc(100% - 60px);
@@ -404,7 +313,8 @@ a {
 	flex-flow: column;
 	margin-top: 30px;
 }
-.form label {
+.form__wrap > label,
+form > label {
 	font-weight: var(--fw-heading);
 	color: #5c5e62;
 	display: block;
@@ -444,6 +354,9 @@ a {
 	flex-direction: row !important;
 	justify-content: flex-start;
 	align-items: top;
+}
+.form__wrap--button {
+	margin: 10px 0;
 }
 
 .circle-box.active {
@@ -998,6 +911,14 @@ input[type=checkbox]:checked.circlebox {
 	animation: pulse 2s;
 	background-color: var(--primary);
 }
+.radio {
+	padding: 0;
+	margin: 0;
+}
+.radio__span {
+	margin-right: 15px;
+}
+
 @-webkit-keyframes pulse {
 	0% {
 		-webkit-box-shadow: 0 0 0 0 rgba(11, 41, 83, 0.4);
@@ -1061,11 +982,6 @@ input[type=checkbox]:checked.circlebox {
 		width: 30px;
 		height: 30px;
 	}
-	div.popup {
-		top: 50%;
-		transform: translate(-50%, -50%);
-		height: 85%;
-	}
 	.arrow {
 		border-top: 7px solid transparent;
 		border-bottom: 7px solid transparent;
@@ -1083,13 +999,13 @@ input[type=checkbox]:checked.circlebox {
 	.sidebar {
 		width: 250px !important;
 	}
-	.popup--right {
-		right: 0;
+	div.popup {
 		left: 50%;
-		transform: translateX(-50%);
+		top: 50%;
+		transform: translate(-50%, -50%);
+		height: 85%;
 		width: 85%;
-		height: 100%;
-		padding: 1em 2.3em;
+		padding: 1em 2.6em;
 	}
 }
 

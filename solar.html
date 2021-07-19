@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="styles/global.css">
     <link rel="stylesheet" type="text/css" href="styles/plugin.css">
-    <link rel="stylesheet" type="text/css" href="styles/solar.css">
     <script src="/scripts/placesHandler.js"></script>
     <script
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAix6OcLoOvh009OoPCM4WwKSo0bxSdDQc&callback=initAutocomplete&libraries=places&v=weekly"
@@ -101,7 +100,7 @@
 
             <form class="form">
                 <div class="form__wrap">
-                    <label for="property_type">Are you interested in solar for a resideintal or commerical
+                    <label for="property_type">Are you interested in solar for a residential or commerical
                         property?</label>
                     <div class="switch">
                         <input class="switch-input" type="checkbox" name="property_type" />
@@ -114,7 +113,12 @@
                 <div class="form__wrap">
                     <label for="own_property">Do you own the property where solar will be
                         installed?</label>
-                    <input class="circlebox" type="checkbox" name="own_property" />
+                    <div class="radio__wrapper form__wrap--button ">
+                        <input class="radio" type="radio" name="own_property" />
+                        <label class="radio__span">Yes </label>
+                        <input class="radio" type="radio" name="own_property" />
+                        <label class="radio__span"> No</label>
+                    </div>
                 </div>
 
 
@@ -122,7 +126,7 @@
                     <label for="address">Property Address <i style="font-weight: normal">(Installation)</i> </label>
                     <input id="autocomplete" class="input" type="text" name="address" autocomplete="off" />
                 </div>
-                <div class="form__wrap">
+                <div class="form__wrap form__wrap--button">
                     <input type="submit" value="Next" class="button button-action">
                 </div>
             </form>
@@ -151,7 +155,7 @@
                 </div>
 
 
-                <div class="form__wrap">
+                <div class="form__wrap form__wrap--button">
                     <input type="submit" value="Next" class="button button-action">
                 </div>
             </form>
@@ -189,7 +193,7 @@
                 </div>
 
                 <div class="form__wrap form__wrap--mgleft form__wrap--mgbtm">
-                    <label for="phone">Is their a different billing address?</label>
+                    <label for="phone">Is their a different billing/mailling address?</label>
                     <input class="circlebox" type="checkbox" name="billing" id="billing--reveal">
                 </div>
 
@@ -205,7 +209,7 @@
                         </span> of Invirogen to receive a Free No Obligation Quote
                     </label>
                 </div>
-                <div class="form__wrap">
+                <div class="form__wrap form__wrap--button">
                     <input class="button button-action" type="submit" value="Submit">
                 </div>
         </div>
