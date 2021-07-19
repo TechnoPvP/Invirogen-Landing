@@ -183,9 +183,30 @@ $(document).ready(function() {
 						window.location.href = '/solar.html';
 					}
 				};
-				$.post('https://adamscode.com/api/inviro/solar', settings, (res, err) => {
-					console.log(res, err);
-				});
+				$.post(
+					{
+						cache       : false,
+						dataType    : 'json',
+						url         : 'https://adamscode.com/api/inviro/solar',
+						data        : JSON.stringify(formData),
+						enctype     : 'mutipart/form-data',
+						crossDomain : true,
+						contentType : 'application/json',
+						method      : 'POST',
+						headers     : {
+							'Access-Control-Allow-Origin' : '*'
+						},
+						success     : function() {
+							window.location.replace(`${window.location.origin}/solar.html`);
+						},
+						error       : function() {
+							window.location.href = '/solar.html';
+						}
+					},
+					(res, err) => {
+						console.log(res, err);
+					}
+				);
 				// $.post('http://localhost:3000/api/inviro/solar', settings, (res, err) => {
 				// 	console.log(res, err);
 				// });
