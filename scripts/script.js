@@ -187,8 +187,8 @@ $(document).ready(function() {
 					{
 						cache       : false,
 						dataType    : 'json',
-						// url         : 'https://adamscode.com/api/inviro/solar',
-						url         : 'http://localhost:3000/api/inviro/solar',
+						url         : 'https://adamscode.com/api/inviro/solar',
+						// url         : 'http://localhost:3000/api/inviro/solar',
 						data        : JSON.stringify(formData),
 						enctype     : 'mutipart/form-data',
 						crossDomain : true,
