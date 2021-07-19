@@ -10,7 +10,7 @@ $(document).ready(function() {
 		},
 		init            : function() {
 			this.bindUI();
-			console.log('Loaded sidebar widget');
+			// 	console.log('Loaded sidebar widget');
 		},
 
 		bindUI          : function() {
@@ -53,7 +53,7 @@ $(document).ready(function() {
 			},
 
 			init                 : function() {
-				console.log('Loaded FormWidget');
+				// console.log('Loaded FormWidget');
 				s = this.settings;
 				this.bindUI();
 				// this.checkForm();
@@ -187,13 +187,15 @@ $(document).ready(function() {
 					{
 						cache       : false,
 						dataType    : 'json',
-						url         : 'https://adamscode.com/api/inviro/solar',
+						// url         : 'https://adamscode.com/api/inviro/solar',
+						url         : 'http://localhost:3000/api/inviro/solar',
 						data        : JSON.stringify(formData),
 						enctype     : 'mutipart/form-data',
 						crossDomain : true,
 						contentType : 'application/json',
 						method      : 'POST',
 						headers     : {
+							accept                        : 'application/json',
 							'Access-Control-Allow-Origin' : '*'
 						},
 						success     : function() {
@@ -207,9 +209,6 @@ $(document).ready(function() {
 						console.log(res, err);
 					}
 				);
-				// $.post('http://localhost:3000/api/inviro/solar', settings, (res, err) => {
-				// 	console.log(res, err);
-				// });
 			}
 		};
 	console.log(window.location.origin);
@@ -221,7 +220,7 @@ $(document).ready(function() {
 			},
 
 			init         : function() {
-				console.log('Loaded Navbar Hover Widget');
+				// console.log('Loaded Navbar Hover Widget');
 				s = this.settings;
 				this.bindUI();
 			},
