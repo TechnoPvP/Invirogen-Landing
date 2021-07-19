@@ -827,6 +827,7 @@ input[type="submit"],
 	font-weight: bold;
 	font-size: 16px;
 	color: var(--primary);
+	text-transform: capitalize;
 }
 .text__subheading {
 	font-size: var(--sub);
