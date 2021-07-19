@@ -797,12 +797,12 @@ input[type="submit"],
 	border-left: 10px solid rgba(205, 205, 205, 0.57);
 	left: 2px;
 }
-.arrow-left.active {
+/* .arrow-left.active {
 	border-right: 10px solid #2d67b2;
 }
 .arrow-right.active {
 	border-left: 10px solid #2d67b2;
-}
+} */
 
 .circle-next {
 	right: 20px;
@@ -957,6 +957,15 @@ input[type=checkbox]:checked.circlebox {
 	}
 }
 
+@media screen and (min-width: 1200px) {
+	.circle:hover > .arrow-right {
+		border-left: 10px solid #2d67b2;
+	}
+	.circle:hover > .arrow-left {
+		border-right: 10px solid #2d67b2;
+	}
+}
+
 @media screen and (max-width: 1200px) {
 	/* body {
 		height: 100%;
@@ -1008,9 +1017,9 @@ input[type=checkbox]:checked.circlebox {
 		left: 0px;
 		border-left: 7px solid rgba(205, 205, 205, 0.57);
 	}
-	.sidebar {
+	/* .sidebar {
 		width: 250px !important;
-	}
+	} */
 	div.popup {
 		left: 50%;
 		top: 50%;

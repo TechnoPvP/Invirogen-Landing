@@ -2,7 +2,7 @@ $(document).ready(function() {
 	// Navbar hamburger click event
 
 	// TODO We can do this even better.
-	SidebarWidget = {
+	const SidebarWidget = {
 		settings        : {
 			sidebar     : $('.sidebar'),
 			hamburger   : $('#hamburger'),
@@ -40,379 +40,184 @@ $(document).ready(function() {
 		}
 	};
 
-	var s,
-		FormWidget = {
-			settings             : {
-				valid       : false,
-				currentForm : 0,
-				forms       : $('.flex__col'),
-				form        : $('.form'),
-				firstForm   : $('#solar-form-1'),
-				secondForm  : $('#solar-form-2'),
-				visibleForm : $('.form:visible')
-			},
+	const FormWidget = {
+		settings             : {
+			valid       : false,
+			currentForm : 0,
+			forms       : $('.flex__col'),
+			form        : $('.form'),
+			firstForm   : $('#solar-form-1'),
+			secondForm  : $('#solar-form-2'),
+			visibleForm : $('.form:visible')
+		},
 
-			init                 : function() {
-				// console.log('Loaded FormWidget');
-				s = this.settings;
-				this.bindUI();
-				this.checkForm();
-			},
+		init                 : function() {
+			// console.log('Loaded FormWidget');
+			this.bindUI();
+			this.checkForm();
+		},
 
-			bindUI               : function() {
-				s.form.on('input', function() {
-					FormWidget.checkForm();
-				});
-				$('#billing--reveal').click(function() {
-					FormWidget.toggleBillingAddress();
-				});
+		bindUI               : function() {
+			this.settings.form.on('input', function() {
+				FormWidget.checkForm();
+			});
+			$('#billing--reveal').click(function() {
+				FormWidget.toggleBillingAddress();
+			});
 
-				this.handleFormSubmission();
-			},
+			this.handleFormSubmission();
+		},
 
-			setButtonDisabled    : function(boolean) {
-				$('.button-action').prop('disabled', boolean);
-			},
+		setButtonDisabled    : function(boolean) {
+			$('.button-action').prop('disabled', boolean);
+		},
 
-			getCurrentForm       : function() {
-				return $('.flex__col.active');
-			},
+		getCurrentForm       : function() {
+			return $('.flex__col.active');
+		},
 
-			toggleBillingAddress : function() {
-				$('#form__billing').toggleClass('form__wrap--hidden');
-				$('.circle-box').toggleClass('active');
-				console.log('helloe');
-			},
+		toggleBillingAddress : function() {
+			$('#form__billing').toggleClass('form__wrap--hidden');
+			$('.circle-box').toggleClass('active');
+		},
 
-			getNextForm          : function() {
-				// If it's the last form submit
-				if (this.settings.currentForm >= this.settings.forms.length) return console.error('Cant go further');
+		getNextForm          : function() {
+			// If it's the last form submit
+			if (this.settings.currentForm >= this.settings.forms.length) return console.error('Cant go further');
 
-				this.settings.currentForm += 1;
-				const nextFormIndex = this.settings.currentForm;
+			this.settings.currentForm += 1;
+			const nextFormIndex = this.settings.currentForm;
 
-				return $(this.settings.forms[nextFormIndex]);
-			},
+			return $(this.settings.forms[nextFormIndex]);
+		},
 
-			toggleNextForm       : function() {
-				FormWidget.saveData();
+		toggleNextForm       : function() {
+			FormWidget.saveData();
 
-				this.getCurrentForm().toggleClass('active');
-				this.getNextForm().toggleClass('active');
+			this.getCurrentForm().toggleClass('active');
+			this.getNextForm().toggleClass('active');
 
-				// Check form inputs and set button disabled prop accordingly
-				this.checkForm();
-			},
+			// Check form inputs and set button disabled prop accordingly
+			this.checkForm();
+		},
 
-			handleFormSubmission : function() {
-				this.settings.forms.each((index, elem) => {
-					$(elem).on('submit', function(e) {
-						e.preventDefault();
+		handleFormSubmission : function() {
+			this.settings.forms.each((index, elem) => {
+				$(elem).on('submit', function(e) {
+					e.preventDefault();
 
-						const buttonValue = $(elem).find('input[type=submit]').val();
-						if (buttonValue == 'Submit') {
-							FormWidget.submitData($(e.target));
-						} else {
-							FormWidget.toggleNextForm();
-						}
-					});
-				});
-			},
-
-			checkForm            : function() {
-				this.getCurrentForm().find('input').each(function(index, elem) {
-					if ($(elem).prop('required') && $(elem).val().trim() <= 0) {
-						FormWidget.setButtonDisabled(true);
-						return false;
-					}
-
-					FormWidget.setButtonDisabled(false);
-				});
-			},
-			saveData             : function() {
-				this.getCurrentForm().find('input').each(function(index, elem) {
-					const inputVal = $(elem).val();
-					const inputElement = $(elem);
-					if (inputVal != null && inputVal != undefined && $(elem).attr('type') != 'submit') {
-						if (inputElement.attr('name') === 'property_type') {
-							window.localStorage.setItem(
-								inputElement.attr('name'),
-								inputElement.prop('checked') ? 'commercial' : 'residential'
-							);
-						} else {
-							window.localStorage.setItem(
-								inputElement.attr('name'),
-								inputElement.is(':checkbox') ? inputElement.prop('checked') : inputVal
-							);
-						}
+					const buttonValue = $(elem).find('input[type=submit]').val();
+					if (buttonValue == 'Submit') {
+						FormWidget.submitData($(e.target));
+					} else {
+						FormWidget.toggleNextForm();
 					}
 				});
-			},
-			submitData           : function(target) {
-				// const testData = {
-				// 	electric_bill          : 190,
-				// 	addtional_improvements : true,
-				// 	own_property           : true,
-				// 	property_type          : 'commerical',
-				// 	address                : '1020 Property Adddress'
-				// };
+			});
+		},
 
-				const formData = { ...localStorage };
-				const lastFormData = target.serializeArray();
-				lastFormData.forEach((elem) => {
-					formData[elem.name] = elem.value;
-				});
-
-				var settings = {
-					cache       : false,
-					dataType    : 'json',
-					data        : JSON.stringify(formData),
-					enctype     : 'mutipart/form-data',
-					crossDomain : true,
-					method      : 'POST',
-					headers     : {
-						accept                        : 'application/json',
-						'Access-Control-Allow-Origin' : '*'
-					},
-					success     : function() {
-						window.location.replace(`${window.location.origin}/solar.html`);
-					},
-					error       : function() {
-						window.location.href = '/solar.html';
-					}
-				};
-				$.post({
-					cache       : false,
-					dataType    : 'json',
-					url         : 'https://adamscode.com/api/inviro/solar',
-					// url         : 'http://localhost:3000/api/inviro/solar',
-					data        : JSON.stringify(formData),
-					enctype     : 'mutipart/form-data',
-					crossDomain : true,
-					contentType : 'application/json',
-					method      : 'POST',
-					headers     : {
-						accept                        : 'application/json',
-						'Access-Control-Allow-Origin' : '*'
-					},
-					success     : function(e) {
-						window.location.replace(`${window.location.origin}/solar.html`);
-						console.log('Sucess');
-					},
-					error       : function(e) {
-						console.table(e);
-						console.log('Big fat error');
-						window.location.href = '/solar.html';
-					}
-				});
-			}
-		};
-	var s,
-		NavbarHover = {
-			settings     : {
-				active  : false,
-				overlay : $('#overlay')
-			},
-
-			init         : function() {
-				// console.log('Loaded Navbar Hover Widget');
-				s = this.settings;
-				this.bindUI();
-			},
-
-			bindUI       : function() {
-				$('.nav__ol').on('mouseleave', () => {
-					this.settings.overlay.toggleClass('active');
-				});
-				this.bindNavLinks();
-			},
-
-			bindNavLinks : function() {
-				$('.nav__a').each(function(index, elem) {
-					elem.addEventListener('mouseenter', function(event) {
-						const pos = elem.getBoundingClientRect();
-						overlay.style.left = pos.x + 'px';
-						overlay.style.height = pos.height + 'px';
-						overlay.style.width = pos.width + 'px';
-						overlay.classList.add('active');
-					});
-				});
-			}
-		};
-
-	// $('#solar-form-2').submit(function(e) {
-	// 	//listen for submit event
-	// 	//TODO Can this be dynamic, it's hardcoded
-	// 	e.preventDefault();
-	// 	var v = $(e.target).serializeArray();
-
-	// 	const data = [
-	// 		...v,
-	// 		{
-	// 			name  : 'address',
-	// 			value : window.localStorage.getItem('address')
-	// 		},
-	// 		{
-	// 			name  : 'electric_bill',
-	// 			value : window.localStorage.getItem('electric_bill')
-	// 		}
-	// 	];
-	// 	data.forEach(function(elem) {
-	// 		$('<input />')
-	// 			.attr('type', 'hidden')
-	// 			.attr('name', elem.name)
-	// 			.attr('value', elem.value)
-	// 			.appendTo('#solar-form-2');
-	// 	});
-	// 	var settings = {
-	// 		cache       : false,
-	// 		dataType    : 'json',
-	// 		data        : JSON.stringify(data),
-	// 		async       : true,
-	// 		crossDomain : true,
-	// 		method      : 'POST',
-	// 		headers     : {
-	// 			accept                        : 'application/json',
-	// 			'Access-Control-Allow-Origin' : '*'
-	// 		},
-	// 		sucess      : function() {
-	// 			window.location.href = '/solar.html';
-	// 		}
-	// 	};
-	// 	// $.post('http://adamscode.com/api/inviro/solar', settings, (res, err) => {
-	// 	// 	console.log(res, err);
-	// 	// 	window.location.href = '/solar.html';
-	// 	// });
-	// 	$.post('http://localhost:3000/api/inviro/solar', settings, (res, err) => {
-	// 		console.log(res, err);
-	// 	});
-	// });
-
-	/**
-	 * Sidebar Related Code
-	 * 
-	 * 
-	 */
-	const prev = $('.circle-back');
-	const next = $('.circle-next');
-
-	const dotsElem = $('.dots');
-	dotsElem.on('click', function(e) {
-		const targetId = e.target.attributes['data-id'];
-
-		if (!targetId) return false;
-
-		lastSlide = currentSlide;
-		getSlide(targetId.value);
-	});
-
-	const slides = [ ...$('.slide') ];
-	let currentSlide = 0;
-	let lastSlide = 0;
-
-	function setupDots() {
-		for (let x = 0; x < slides.length; x++) {
-			$('.dots').append(`<div class="dots__dot ${x == 0 ? 'active' : ''} " data-id=${x}> </div>`);
-		}
-	}
-
-	function changeDots(slide) {
-		const dots = $('.dots').children();
-		dots.each(function() {
-			const dot = $(this);
-			if (dot.hasClass('active')) {
-				dot.removeClass('active');
-			}
-		});
-		$(dots[slide]).addClass('active');
-	}
-
-	function getSlide(slide) {
-		currentSlide = +slide;
-		setCurrentSlide(+slide);
-		changeDots(slide);
-	}
-
-	function setCurrentSlide(current) {
-		$(slides[lastSlide]).removeClass('active');
-		$(slides[current]).addClass('active');
-	}
-	function nextSlide() {
-		lastSlide = currentSlide;
-		if (currentSlide >= slides.length - 1) {
-			getSlide(0);
-			return;
-		}
-		currentSlide += 1;
-		changeDots(currentSlide);
-		setCurrentSlide(currentSlide);
-	}
-	function prevSlide() {
-		lastSlide = currentSlide;
-		if (currentSlide == 0) {
-			getSlide(slides.length - 1);
-			return;
-		}
-		currentSlide -= 1;
-		changeDots(currentSlide);
-		setCurrentSlide(currentSlide);
-	}
-
-	const slideShow = (time) => {
-		var ticker = setInterval(function() {
-			nextSlide();
-		}, time * 1000);
-		return {
-			start : function() {
-				ticker = setInterval(function() {
-					nextSlide();
-				}, time * 1000);
-			},
-			stop  : function() {
-				if (!ticker) {
-					console.log('Slide show is not started');
+		checkForm            : function() {
+			this.getCurrentForm().find('input').each(function(index, elem) {
+				if ($(elem).prop('required') && $(elem).val().trim() <= 0) {
+					FormWidget.setButtonDisabled(true);
+					return false;
 				}
-				active = false;
-				clearInterval(ticker);
-			}
-		};
+
+				FormWidget.setButtonDisabled(false);
+			});
+		},
+		saveData             : function() {
+			this.getCurrentForm().find('input').each(function(index, elem) {
+				const inputVal = $(elem).val();
+				const inputElement = $(elem);
+				if (inputVal != null && inputVal != undefined && $(elem).attr('type') != 'submit') {
+					if (inputElement.attr('name') === 'property_type') {
+						window.sessionStorage.setItem(
+							inputElement.attr('name'),
+							inputElement.prop('checked') ? 'commercial' : 'residential'
+						);
+					} else {
+						window.sessionStorage.setItem(
+							inputElement.attr('name'),
+							inputElement.is(':checkbox') ? inputElement.prop('checked') : inputVal
+						);
+					}
+				}
+			});
+		},
+		submitData           : function(target) {
+			this.saveData();
+			// const testData = {
+			// 	electric_bill          : 190,
+			// 	addtional_improvements : true,
+			// 	own_property           : true,
+			// 	property_type          : 'commerical',
+			// 	address                : '1020 Property Adddress'
+			// };
+
+			// TODO Remove as i'm storing all data in localstorage.
+			// const formData = { ...localStorage };
+			// const lastFormData = target.serializeArray();
+			// lastFormData.forEach((elem) => {
+			// 	formData[elem.name] = elem.value;
+			// });
+
+			$.post({
+				cache       : false,
+				dataType    : 'json',
+				url         : 'https://adamscode.com/api/inviro/solar',
+				// url         : 'http://localhost:3000/api/inviro/solar',
+				data        : JSON.stringify(window.sessionStorage),
+				enctype     : 'mutipart/form-data',
+				crossDomain : true,
+				contentType : 'application/json',
+				method      : 'POST',
+				headers     : {
+					accept                        : 'application/json',
+					'Access-Control-Allow-Origin' : '*'
+				},
+				success     : function(e) {
+					window.location.replace(`${window.location.origin}/solar.html`);
+					console.log('Sucessful post');
+				},
+				error       : function(e) {
+					console.table(e);
+					window.location.href = '/solar.html';
+				}
+			});
+		}
 	};
 
-	// Circle Next Slide Button Hover
-	if ($(window).width() >= 990) {
-		$('.circle').hover(
-			function(e) {
-				const arrow = $(this).children();
-
-				arrow.toggleClass('active');
-			},
-			function() {
-				$(this).children().toggleClass('active');
-			}
-		);
-	}
-	// Code Related to showing the slider button
-	$('.slider').hover(
-		function() {
-			$('.circle').toggleClass('on');
-			slideShowELem.stop();
+	const NavbarHover = {
+		settings     : {
+			active  : false,
+			overlay : $('#overlay')
 		},
-		function() {
-			$('.circle').toggleClass('on');
-			slideShowELem.start();
-		}
-	);
 
-	const slideShowELem = slideShow(4.5);
-	setupDots();
-	prev.click(function() {
-		prevSlide();
-		slideShowELem.stop();
-	});
-	next.click(function() {
-		nextSlide();
-		slideShowELem.stop();
-	});
+		init         : function() {
+			// console.log('Loaded Navbar Hover Widget');
+			this.bindUI();
+		},
+
+		bindUI       : function() {
+			$('.nav__ol').on('mouseleave', () => {
+				this.settings.overlay.toggleClass('active');
+			});
+			this.bindNavLinks();
+		},
+
+		bindNavLinks : function() {
+			$('.nav__a').each(function(index, elem) {
+				elem.addEventListener('mouseenter', function(event) {
+					const pos = elem.getBoundingClientRect();
+					overlay.style.left = pos.x + 'px';
+					overlay.style.height = pos.height + 'px';
+					overlay.style.width = pos.width + 'px';
+					overlay.classList.add('active');
+				});
+			});
+		}
+	};
 
 	const Popup = () => {
 		const se = {
@@ -503,6 +308,117 @@ $(document).ready(function() {
 			closeTab : function() {}
 		};
 	};
+
+	/**
+	 * Slider
+	 */
+	const prev = $('.circle-back');
+	const next = $('.circle-next');
+
+	const dotsElem = $('.dots');
+	dotsElem.on('click', function(e) {
+		const targetId = e.target.attributes['data-id'];
+
+		if (!targetId) return false;
+
+		lastSlide = currentSlide;
+		getSlide(targetId.value);
+	});
+
+	const slides = [ ...$('.slide') ];
+	let currentSlide = 0;
+	let lastSlide = 0;
+
+	function setupDots() {
+		for (let x = 0; x < slides.length; x++) {
+			$('.dots').append(`<div class="dots__dot ${x == 0 ? 'active' : ''} " data-id=${x}> </div>`);
+		}
+	}
+
+	function changeDots(slide) {
+		const dots = $('.dots').children();
+		dots.each(function() {
+			const dot = $(this);
+			if (dot.hasClass('active')) {
+				dot.removeClass('active');
+			}
+		});
+		$(dots[slide]).addClass('active');
+	}
+
+	function getSlide(slide) {
+		currentSlide = +slide;
+		setCurrentSlide(+slide);
+		changeDots(slide);
+	}
+
+	function setCurrentSlide(current) {
+		$(slides[lastSlide]).removeClass('active');
+		$(slides[current]).addClass('active');
+	}
+	function nextSlide() {
+		lastSlide = currentSlide;
+		if (currentSlide >= slides.length - 1) {
+			getSlide(0);
+			return;
+		}
+		currentSlide += 1;
+		changeDots(currentSlide);
+		setCurrentSlide(currentSlide);
+	}
+	function prevSlide() {
+		lastSlide = currentSlide;
+		if (currentSlide == 0) {
+			getSlide(slides.length - 1);
+			return;
+		}
+		currentSlide -= 1;
+		changeDots(currentSlide);
+		setCurrentSlide(currentSlide);
+	}
+
+	const slideShow = (time) => {
+		var ticker = setInterval(function() {
+			nextSlide();
+		}, time * 1000);
+		return {
+			start : function() {
+				ticker = setInterval(function() {
+					nextSlide();
+				}, time * 1000);
+			},
+			stop  : function() {
+				if (!ticker) {
+					console.log('Slide show is not started');
+				}
+				active = false;
+				clearInterval(ticker);
+			}
+		};
+	};
+
+	// Code Related to showing the slider button
+	$('.slider').hover(
+		function() {
+			$('.circle').toggleClass('on');
+			slideShowELem.stop();
+		},
+		function() {
+			$('.circle').toggleClass('on');
+			slideShowELem.start();
+		}
+	);
+
+	const slideShowELem = slideShow(4.5);
+	setupDots();
+	prev.click(function() {
+		prevSlide();
+		slideShowELem.stop();
+	});
+	next.click(function() {
+		nextSlide();
+		slideShowELem.stop();
+	});
 
 	function initWidgets() {
 		SidebarWidget.init();
