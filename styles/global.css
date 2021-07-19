@@ -824,6 +824,7 @@ input[type="submit"],
 	font-weight: 300;
 }
 .text--boldblue {
+	font-weight: bold;
 	font-size: 16px;
 	color: var(--primary);
 }
