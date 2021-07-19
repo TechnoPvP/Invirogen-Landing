@@ -183,35 +183,32 @@ $(document).ready(function() {
 						window.location.href = '/solar.html';
 					}
 				};
-				$.post(
-					{
-						cache       : false,
-						dataType    : 'json',
-						url         : 'https://adamscode.com/api/inviro/solar',
-						// url         : 'http://localhost:3000/api/inviro/solar',
-						data        : JSON.stringify(formData),
-						enctype     : 'mutipart/form-data',
-						crossDomain : true,
-						contentType : 'application/json',
-						method      : 'POST',
-						headers     : {
-							accept                        : 'application/json',
-							'Access-Control-Allow-Origin' : '*'
-						},
-						success     : function() {
-							window.location.replace(`${window.location.origin}/solar.html`);
-						},
-						error       : function() {
-							window.location.href = '/solar.html';
-						}
+				$.post({
+					cache       : false,
+					dataType    : 'json',
+					url         : 'https://adamscode.com/api/inviro/solar',
+					// url         : 'http://localhost:3000/api/inviro/solar',
+					data        : JSON.stringify(formData),
+					enctype     : 'mutipart/form-data',
+					crossDomain : true,
+					contentType : 'application/json',
+					method      : 'POST',
+					headers     : {
+						accept                        : 'application/json',
+						'Access-Control-Allow-Origin' : '*'
 					},
-					(res, err) => {
-						console.log(res, err);
+					success     : function(e) {
+						window.location.replace(`${window.location.origin}/solar.html`);
+						console.log('Sucess');
+					},
+					error       : function(e) {
+						console.table(e);
+						console.log('Big fat error');
+						window.location.href = '/solar.html';
 					}
-				);
+				});
 			}
 		};
-	console.log(window.location.origin);
 	var s,
 		NavbarHover = {
 			settings     : {
