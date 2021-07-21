@@ -19,8 +19,7 @@
 :root {
 	--dark-gray: #393c41;
 	--light-gray: #f4f4f4;
-	--primary: #2d67b2;
-
+	--primary: #f99c30;
 	--heading-1: 2.857142857142857em;
 	--heading-2: 34px;
 	--heading-3: 30px;
@@ -203,7 +202,7 @@ a {
 	position: absolute;
 	right: 0;
 	top: 0;
-	width: 100%;
+	width: auto;
 	height: auto;
 	display: none;
 	justify-content: center;
@@ -213,7 +212,7 @@ a {
 	-webkit-backdrop-filter: blur(19.5px);
 	border-radius: 5px;
 	border: 1px solid rgba(255, 255, 255, 0.18);
-	z-index: 2000;
+	z-index: 5000;
 
 	transition: width 0.35s linear;
 	/* opacity: 0; */
@@ -369,6 +368,12 @@ form > label {
 }
 .form__wrap--button {
 	margin: 10px 0;
+}
+.form__wrap__span {
+	position: absolute;
+	top: 21%;
+	left: 150px;
+	color: var(--primary);
 }
 
 .circle-box.active {
@@ -572,10 +577,10 @@ input[type="submit"],
 	z-index: 5000;
 }
 .popup--right {
-	top: 60px;
-	right: 0;
-	width: 550px;
-	height: 100%;
+	top: 70px;
+	right: 20px;
+	width: 510px;
+	height: 90%;
 }
 .popup--center {
 	top: 50%;
@@ -829,6 +834,16 @@ input[type="submit"],
 	color: var(--primary);
 	text-transform: capitalize;
 }
+.text--iblue {
+	color: var(--primary);
+	font-weight: normal;
+	font-style: italic;
+}
+.text--igray {
+	color: #b4b4b4;
+	font-weight: normal;
+	font-style: italic;
+}
 .text__subheading {
 	font-size: var(--sub);
 	border-bottom: 1px solid var(--dark-gray);
@@ -845,45 +860,83 @@ input[type="submit"],
 	right: 10px;
 }
 .mhelper__button {
-	display: flex;
 	position: relative;
+	display: flex;
 	align-items: center;
+	justify-content: center;
 	z-index: auto;
-	justify-content: space-around;
 	width: 50px;
 	height: 50px;
 	padding: 0px 4px;
-	background-color: var(--primary);
+	background-color: #ececec;
 	border-radius: 50%;
-}
-.mhelper__circle {
-	width: 6px;
-	height: 6px;
-	background-color: white;
-	border-radius: 100%;
-}
-.mhelper__items-wrapper {
-	position: absolute;
-	bottom: 0px;
-	opacity: 0;
-}
-.mhelper__items-wrapper.active {
-	top: -220px;
-}
-.mhelper__items-wrapper.active .mhelper__item {
-	position: relative;
-	margin: 20px 0;
+
+	border: 1.5px solid #f99b3000;
+
+	transition: border 0.25s linear;
 }
 
-.mhelper__item {
-	background-color: red;
+.mhelper__button.active {
+	border: 1.5px solid var(--primary);
+	background-color: #f99b3078;
+}
+.mhelper__buton.active .mehlper__circle {
+	background-color: var(--primary);
+}
+
+.grid-wrapper {
+	display: grid;
+	grid-template-columns: 4px 4px 4px;
+	grid-template-rows: 4px 4px 4px;
+	gap: 3px;
+
+	transition: gap 0.35s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.mhelper__circle {
+	width: 4px;
+	height: 4px;
+	background-color: #8a8a8a;
 	border-radius: 100%;
+
+	transition: background-color 0.35s linear;
+}
+
+.mhelper__items-wrapper {
+	position: relative;
+	display: none;
+}
+.mhelper__item {
+	background-color: #dddddd;
+	border-radius: 100%;
+	margin: 10px 0px;
 	width: 50px;
 	height: 50px;
-	position: absolute;
-	bottom: 0px;
-	transition: opacity 1s ease-in-out;
+	border: 1.5px solid #f99b3000;
+
+	transition: border 0.25s linear;
 }
+.mhelper__item__a {
+	/* background-image: url('../assets/icons/phone-telephone.svg');
+	background-repeat: no-repeat;
+	background-size: 30px;
+	background-position: center; */
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+	width: 100%;
+	mask-size: cover;
+}
+
+.icon {
+	fill: #989898;
+	transition: fill 0.25s linear;
+	width: 20px;
+	height: 20px;
+}
+
 /* 
 	================================
 	SCROLL BAR RELATED
@@ -929,6 +982,13 @@ input[type=checkbox]:checked.circlebox {
 	animation: pulse 2s;
 	background-color: var(--primary);
 }
+
+/* FIle Upload CUstom ELement */
+input[type=file] {
+	-webkit-appearance: none;
+	outline: none;
+}
+
 .radio {
 	padding: 0;
 	margin: 0;
@@ -969,6 +1029,18 @@ input[type=checkbox]:checked.circlebox {
 	}
 	.circle:hover > .arrow-left {
 		border-right: 10px solid #2d67b2;
+	}
+	.mhelper__button:hover {
+		border: 1.5px solid var(--primary);
+	}
+	.mhelper__button:hover .mhelper__circle {
+		background-color: var(--primary);
+	}
+	.mhelper__item:hover {
+		border: 1px solid var(--primary);
+	}
+	.mhelper__item:hover .icon {
+		fill: #f99c30;
 	}
 }
 
@@ -1023,9 +1095,9 @@ input[type=checkbox]:checked.circlebox {
 		left: 0px;
 		border-left: 7px solid rgba(205, 205, 205, 0.57);
 	}
-	/* .sidebar {
-		width: 250px !important;
-	} */
+	.sidebar {
+		width: auto !important;
+	}
 	div.popup {
 		left: 50%;
 		top: 50%;

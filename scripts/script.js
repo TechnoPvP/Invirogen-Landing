@@ -48,7 +48,8 @@ $(document).ready(function() {
 			form        : $('.form'),
 			firstForm   : $('#solar-form-1'),
 			secondForm  : $('#solar-form-2'),
-			visibleForm : $('.form:visible')
+			visibleForm : $('.form:visible'),
+			radioWrap   : $('.radio__wrapper input[name=other_billing]')
 		},
 
 		init                 : function() {
@@ -61,8 +62,13 @@ $(document).ready(function() {
 			this.settings.form.on('input', function() {
 				FormWidget.checkForm();
 			});
-			$('#billing--reveal').click(function() {
-				FormWidget.toggleBillingAddress();
+			this.settings.radioWrap.on('change', function() {
+				if ($(this).val() == 'yes') {
+					FormWidget.setBillingAddress(true);
+					console.log('Set billing address true');
+				} else {
+					FormWidget.setBillingAddress(false);
+				}
 			});
 
 			this.handleFormSubmission();
@@ -76,9 +82,12 @@ $(document).ready(function() {
 			return $('.flex__col.active');
 		},
 
-		toggleBillingAddress : function() {
-			$('#form__billing').toggleClass('form__wrap--hidden');
-			$('.circle-box').toggleClass('active');
+		setBillingAddress    : function(boolean) {
+			if (boolean) {
+				$('#form__billing').removeClass('form__wrap--hidden');
+				return;
+			}
+			$('#form__billing').addClass('form__wrap--hidden');
 		},
 
 		getNextForm          : function() {
@@ -136,7 +145,13 @@ $(document).ready(function() {
 							inputElement.attr('name'),
 							inputElement.prop('checked') ? 'commercial' : 'residential'
 						);
+					} else if (inputElement.attr('type') == 'radio') {
+						if (inputElement.is(':checked')) {
+							console.log(inputElement.attr('value'));
+							window.sessionStorage.setItem(inputElement.attr('name'), inputElement.attr('value'));
+						}
 					} else {
+						console.log(inputElement.attr('value'));
 						window.sessionStorage.setItem(
 							inputElement.attr('name'),
 							inputElement.is(':checkbox') ? inputElement.prop('checked') : inputVal
@@ -288,7 +303,7 @@ $(document).ready(function() {
 
 	const MobileHelper = function() {
 		const s = {
-			helperButton     : $('.mhelper'),
+			helperButton     : $('.mhelper__button'),
 			helperIemWrapper : $('.mhelper__items-wrapper'),
 			helperItems      : $('.mhelper__item')
 		};
@@ -299,9 +314,11 @@ $(document).ready(function() {
 			},
 			bindUI   : function() {
 				s.helperButton.click(function() {
-					SidebarWidget.toggleBlur();
-					s.helperIemWrapper.toggleClass('active');
-					s.helperItems.fadeIn();
+					// TODO Do we want to toggle blur for this?
+					// SidebarWidget.toggleBlur();
+					$('.grid-wrapper').toggleClass('active');
+					$('.mhelper__button').toggleClass('active');
+					$('.mhelper__items-wrapper').fadeToggle(250);
 				});
 			},
 			openTab  : function() {},
