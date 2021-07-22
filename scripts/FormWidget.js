@@ -211,6 +211,8 @@ const Progress = function() {
 
 					Progress().setCurrentProgress($(this).data('index'));
 					FormWidget.setCurrentForm($(this).data('index'));
+				} else {
+					alert('Please fill in required information before going forward.');
 				}
 			});
 		},
