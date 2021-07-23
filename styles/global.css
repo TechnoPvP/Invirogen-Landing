@@ -270,6 +270,7 @@ a {
 }
 .flex__wrapper {
 	position: relative;
+	overflow-y: auto;
 	width: 35%;
 }
 .flex__details {
@@ -287,7 +288,6 @@ a {
 
 .flex__col.active {
 	display: block;
-	overflow-y: auto;
 }
 .flex__col.active.flex__col--center {
 	align-items: center;
@@ -574,7 +574,7 @@ input[type="submit"],
 .popup--right {
 	top: 70px;
 	right: 20px;
-	width: 510px;
+	width: 33%;
 	height: 90%;
 }
 .popup--center {
@@ -614,6 +614,7 @@ input[type="submit"],
 	right: 0px;
 	float: right;
 	top: 0px;
+	transform: translateX(15px);
 
 	display: flex;
 	justify-content: center;
