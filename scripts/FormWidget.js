@@ -13,16 +13,13 @@ const FormWidget = {
 		// console.log('Loaded FormWidget');
 		this.bindUI();
 		Progress().init();
-
-		//TODO Add Back In
-		// this.checkForm();
 	},
 
 	bindUI               : function() {
-		// TODO Add Back in
-		// this.settings.form.on('input', function() {
-		// 	FormWidget.checkForm();
-		// });
+		this.settings.form.on('input', () => {
+			this.disableButton(this.checkForm());
+			console.log(this.checkForm());
+		});
 		this.settings.radioWrap.on('change', function() {
 			if ($(this).val() == 'yes') {
 				FormWidget.setBillingAddress(true);
@@ -35,16 +32,16 @@ const FormWidget = {
 		this.handleFormSubmission();
 	},
 
-	setButtonDisabled    : function(boolean) {
-		$('.button-action').prop('disabled', boolean);
+	disableButton        : function(boolean) {
+		this.getCurrentForm().find('.button--action').prop('disabled', boolean ? false : true);
 	},
 
 	setBillingAddress    : function(boolean) {
 		if (boolean) {
-			$('#form__billing').removeClass('form__wrap--hidden');
+			$('#form--billing').removeClass('form__wrap--hidden');
 			return;
 		}
-		$('#form__billing').addClass('form__wrap--hidden');
+		$('#form--billing').addClass('form__wrap--hidden');
 	},
 
 	getCurrentForm       : function() {
@@ -57,21 +54,27 @@ const FormWidget = {
 		}
 
 		this.settings.currentForm = this.settings.currentForm += 1;
-		const formElement = $(this.settings.forms[this.settings.currentForm]);
+		this.setCurrentForm(this.settings.currentForm);
+		// const formElement = $(this.settings.forms[this.settings.currentForm]);
 
-		this.getCurrentForm().removeClass('active');
-		formElement.addClass('active');
+		// this.saveData();
+
+		// // Duplicate Code Fix DRY.
+		// this.getCurrentForm().removeClass('active');
+		// formElement.addClass('active');
 
 		return $(this.settings.forms[this.settings.currentForm]);
 	},
 
 	setCurrentForm       : function(index) {
 		// Save the form data before moving to another form
-		FormWidget.saveData();
+		this.saveData();
 
 		const formAtIndex = $(this.settings.formList[index]);
-
 		this.settings.currentForm = index;
+
+		Progress().setCurrentProgress(FormWidget.settings.currentForm);
+
 		this.getCurrentForm().removeClass('active');
 		formAtIndex.addClass('active');
 	},
@@ -83,13 +86,11 @@ const FormWidget = {
 
 				const buttonValue = $(elem).find('input[type=submit]').val();
 				if (buttonValue == 'Submit') {
-					FormWidget.submitData($(e.target));
+					FormWidget.postData($(e.target));
 				} else {
 					FormWidget.getNextForm();
-					console.log(FormWidget.settings.currentForm);
 
 					// TODO Implement progress next
-					Progress().setCurrentProgress(FormWidget.settings.currentForm);
 				}
 			});
 		});
@@ -100,17 +101,20 @@ const FormWidget = {
 		this.getNextForm().addClass('active');
 
 		// Check form inputs and set button disabled prop accordingly
-		// this.checkForm();
+		this.disableButton(this.checkForm());
 	},
 	checkForm            : function() {
-		this.getCurrentForm().find('input').each(function(index, elem) {
-			if ($(elem).prop('required') && $(elem).val().trim() <= 0) {
-				FormWidget.setButtonDisabled(true);
+		let isFormValid = false;
+
+		this.getCurrentForm().find('input[required]').each(function(index, elem) {
+			if ($(elem).is(':invalid')) {
+				isFormValid = false;
 				return false;
 			}
-
-			FormWidget.setButtonDisabled(false);
+			// If it hasn't returned false by here than the form is valid.
+			isFormValid = true;
 		});
+		return isFormValid;
 	},
 	saveData             : function() {
 		this.getCurrentForm().find('input').each(function(index, elem) {
@@ -136,7 +140,7 @@ const FormWidget = {
 			}
 		});
 	},
-	submitData           : function(target) {
+	postData             : function(target) {
 		this.saveData();
 		// const testData = {
 		// 	electric_bill          : 190,
@@ -145,13 +149,6 @@ const FormWidget = {
 		// 	property_type          : 'commerical',
 		// 	address                : '1020 Property Adddress'
 		// };
-
-		// TODO Remove as i'm storing all data in localstorage.
-		// const formData = { ...localStorage };
-		// const lastFormData = target.serializeArray();
-		// lastFormData.forEach((elem) => {
-		// 	formData[elem.name] = elem.value;
-		// });
 
 		$.post({
 			cache       : false,
@@ -167,8 +164,9 @@ const FormWidget = {
 				accept                        : 'application/json',
 				'Access-Control-Allow-Origin' : '*'
 			},
-			success     : function(e) {
-				window.location.replace(`${window.location.origin}/solar.html`);
+			success     : () => {
+				this.getNextForm();
+				Progress().disableClick();
 				console.log('Sucessful post');
 			},
 			error       : function(e) {
@@ -201,20 +199,22 @@ const Progress = function() {
 	return {
 		init               : function() {
 			this.bindUI();
-			this.setCurrentProgress(0);
 		},
 		bindUI             : function() {
 			s.pointsList.click(function() {
-				if ($(this).hasClass('active')) {
+				console.log(FormWidget.checkForm());
+				if ($(this).hasClass('active') || FormWidget.checkForm()) {
 					const parentOffset = $(this).parent().offset();
 					const circleOffset = parentOffset.left - $(this).offset().left;
-
 					Progress().setCurrentProgress($(this).data('index'));
 					FormWidget.setCurrentForm($(this).data('index'));
 				} else {
 					alert('Please fill in required information before going forward.');
 				}
 			});
+		},
+		disableClick() {
+			s.pointsList.off('click');
 		},
 
 		setCurrentProgress : function(index) {
@@ -230,7 +230,6 @@ const Progress = function() {
 
 			// Check if it has past any circles than highlight them.
 			checkProgressPastCircle();
-			console.log('Circle Offset ' + circleOffset);
 		}
 	};
 };

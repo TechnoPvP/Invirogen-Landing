@@ -1,48 +1,9 @@
 import FormWidget from './FormWidget.js';
 import MobileHelper from './MobileHelper.js';
 import ImageSlider from './ImageSlider.js';
+import SidebarWidget from '../scripts/SidebarWidget.js';
 
 $(document).ready(function() {
-	// Navbar hamburger click event
-	// TODO We can do this even better.
-	const SidebarWidget = {
-		settings        : {
-			sidebar     : $('.sidebar'),
-			hamburger   : $('#hamburger'),
-			blurOverlay : $('.blur-overlay')
-		},
-		init            : function() {
-			this.bindUI();
-			// 	console.log('Loaded sidebar widget');
-		},
-
-		bindUI          : function() {
-			$('#hamburger').on('click', function() {
-				SidebarWidget.toggleSidebar();
-			});
-			this.settings.blurOverlay.on('click', () => {
-				Popup().closePopup();
-				this.closeSidebar();
-			});
-		},
-		toggleBlur      : function() {
-			this.settings.blurOverlay.fadeToggle();
-		},
-		toggleHamburger : function() {
-			this.settings.hamburger.fadeToggle();
-		},
-		toggleSidebar   : function() {
-			// SidebarWidget.settings.sidebar.toggleClass('active');
-			this.settings.sidebar.fadeToggle();
-			this.toggleBlur();
-			this.settings.hamburger.toggleClass('open');
-		},
-		closeSidebar    : function() {
-			this.settings.sidebar.fadeOut();
-			this.settings.hamburger.removeClass('open');
-		}
-	};
-
 	const NavbarHover = {
 		settings     : {
 			active  : false,

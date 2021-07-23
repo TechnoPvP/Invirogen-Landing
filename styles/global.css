@@ -26,12 +26,17 @@
 	--heading-3: 30px;
 	--heading-4: 2em;
 
-	--sub: 17px;
-	--body: 1em;
+	--space-md: 30px;
 
 	--border-radius: 20px;
+	--br-button: 30px;
 
 	--f-body: 'Century Gothic', sans-serif;
+
+	--fs-body: 1em;
+	--fs-sub: 17px;
+	--fs-small: 12px;
+
 	--fw-body: 300;
 	--fw-heading: bold;
 	--fw-subheading: 400;
@@ -70,7 +75,7 @@ h4 {
 }
 
 p {
-	font-size: var(--body);
+	font-size: var(--fs-body);
 	font-weight: var(--fw-body);
 	line-height: 2;
 	color: var(--dark-gray);
@@ -83,7 +88,7 @@ body {
 	width: 100%;
 	font-family: var(--f-body);
 	color: var(--dark-gray);
-	overflow: hidden;
+	/* overflow: hidden; */
 }
 html {
 	height: calc(100% - 60px);
@@ -263,40 +268,18 @@ a {
 	display: flex;
 	height: 100%;
 }
+.flex__wrapper {
+	position: relative;
+	width: 35%;
+}
 .flex__details {
 	position: absolute;
 	bottom: 40px;
 	right: 35px;
 }
-
-.price {
-	position: absolute;
-	bottom: -40px;
-	width: 300px;
-	padding: 5px 5px;
-
-	left: 50%;
-	transform: translate(-50%, 15%);
-	font-size: 18px;
-	font-weight: 500;
-	z-index: 10;
-
-	background-color: var(--light-gray);
-	border-radius: var(--border-radius);
-	text-align: center;
-}
-
-.flex__image-full {
-	background: url(/assets/solar_install_photo.jpg);
-	background-position: 50%;
-	background-repeat: no-repeat;
-	background-size: cover;
-	flex-grow: 1;
-}
-
 .flex__col {
-	width: 550px;
-	height: 100%;
+	width: 100%;
+	height: auto;
 	display: none;
 	padding: 0 2em 2em 2em;
 	position: relative;
@@ -305,6 +288,16 @@ a {
 .flex__col.active {
 	display: block;
 	overflow-y: auto;
+}
+.flex__col.active.flex__col--center {
+	align-items: center;
+	display: flex;
+	flex-flow: column nowrap;
+	height: auto;
+	justify-content: center;
+	position: absolute;
+	top: 50%;
+	transform: translateY(-80%);
 }
 .flex__col__h4 {
 	margin-bottom: 12px;
@@ -321,7 +314,7 @@ a {
 .form {
 	display: flex;
 	flex-flow: column;
-	/* margin-top: 30px; */
+	margin-top: 30px;
 }
 .form__wrap > label,
 form > label {
@@ -503,13 +496,16 @@ input[type=checkbox]:checked + .form__wrap--hidden {
 }
 
 .button {
-	padding: 13px 0;
+	padding: 1em 2.5em;
 	font-weight: 600;
-	border-radius: var(--border-radius);
+	border-radius: var(--br-button);
 	border: none;
 }
+.button--mgtop {
+	margin-top: var(--space-md);
+}
 /* Button Related */
-.button-action {
+.button--action {
 	background-color: var(--primary);
 	color: white;
 
@@ -609,7 +605,7 @@ input[type="submit"],
 	margin-bottom: 10px;
 }
 .popup__x {
-	background-color: #cccccc;
+	background-color: #c0bfbf81;
 	width: 25px;
 	height: 25px;
 	border-radius: 50%;
@@ -633,7 +629,7 @@ input[type="submit"],
 	content: ' ';
 	height: 10px;
 	width: 2px;
-	background-color: #333;
+	background-color: rgba(51, 51, 51, 0.305);
 
 	transition: background-color 0.15s linear;
 }
@@ -711,7 +707,7 @@ input[type="submit"],
 }
 .tooltip--btm-right {
 	bottom: 10px;
-	font-size: var(--sub);
+	font-size: var(--fs-sub);
 	position: absolute;
 	right: 0;
 }
@@ -835,6 +831,7 @@ input[type="submit"],
 	left: 20px;
 }
 
+/* TODO Reformat Global Vars Better */
 /* Text Related Css */
 .text__footer {
 	color: var(--dark-gray);
@@ -847,16 +844,29 @@ input[type="submit"],
 	margin: 10px auto;
 	font-weight: 300;
 }
+.text--button {
+	color: var(--primary);
+	text-decoration: underline;
+	cursor: pointer;
+}
 .text--boldblue {
 	font-weight: bold;
 	font-size: 16px;
 	color: var(--primary);
 	text-transform: capitalize;
 }
+.text--small {
+	font-size: var(--fs-small);
+}
 .text--iblue {
 	color: var(--primary);
 	font-weight: normal;
 	font-style: italic;
+}
+
+.text--grey {
+	color: #b4b4b4;
+	font-weight: normal;
 }
 .text--igray {
 	color: #b4b4b4;
@@ -864,7 +874,7 @@ input[type="submit"],
 	font-style: italic;
 }
 .text__subheading {
-	font-size: var(--sub);
+	font-size: var(--fs-sub);
 	border-bottom: 1px solid var(--dark-gray);
 }
 /* 
@@ -887,35 +897,46 @@ input[type="submit"],
 	width: 50px;
 	height: 50px;
 	padding: 0px 4px;
-	background-color: #ececec;
+
+	/* TODO Fix This COde */
+	background: rgba(229, 229, 229, 0.30);
+	box-shadow: 0 6px 15px -7px rgba(85, 84, 84, 0.582);
+	backdrop-filter: blur(19.5px);
+	-webkit-backdrop-filter: blur(19.5px);
+	border-radius: 5px;
+	border: 1px solid rgba(255, 255, 255, 0.18);
 	border-radius: 50%;
 
-	border: 1.5px solid #f99b3000;
+	/* border-radius: 50%;
+	border: 1px solid rgba(57, 60, 65, 0.589);
+	background-color: #80808015;
 
-	transition: border 0.25s linear;
+	border: 1.5px solid #f99b3000;
+	*/
 }
 
 .mhelper__button.active {
 	border: 1.5px solid var(--primary);
-	background-color: #f99b3078;
+	background-color: #5091e5b7;
+}
+.mhelper__button.active .mhelper__circle {
+	background-color: var(--primary);
 }
 .mhelper__buton.active .mehlper__circle {
 	background-color: var(--primary);
 }
 
-.grid-wrapper {
+.mhelper__grid {
 	display: grid;
 	grid-template-columns: 4px 4px 4px;
 	grid-template-rows: 4px 4px 4px;
 	gap: 3px;
-
-	transition: gap 0.35s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
 .mhelper__circle {
 	width: 4px;
 	height: 4px;
-	background-color: #8a8a8a;
+	background-color: #90909042;
 	border-radius: 100%;
 
 	transition: background-color 0.35s linear;
@@ -926,7 +947,7 @@ input[type="submit"],
 	display: none;
 }
 .mhelper__item {
-	background-color: #dddddd;
+	background: rgba(229, 229, 229, 0.30);
 	border-radius: 100%;
 	margin: 10px 0px;
 	width: 50px;
@@ -950,7 +971,7 @@ input[type="submit"],
 }
 
 .icon {
-	fill: #989898;
+	fill: #aaaaaa7c;
 	transition: fill 0.25s linear;
 	width: 20px;
 	height: 20px;
@@ -965,7 +986,7 @@ input[type="submit"],
 	background-color: #e2e2e2;
 	display: block;
 	position: relative;
-	width: calc(100% - 80px);
+	width: 50%;
 	margin: 2em auto;
 	height: 3px;
 }
@@ -981,7 +1002,7 @@ input[type="submit"],
 }
 .progress__circle__wrapper {
 	position: absolute;
-	top: -8px;
+	top: -6px;
 	width: 100%;
 
 	display: flex;
@@ -991,8 +1012,8 @@ input[type="submit"],
 	/* border: 1px solid green; */
 }
 .progress__circle {
-	width: 20px;
-	height: 20px;
+	width: 15px;
+	height: 15px;
 	border-radius: 50%;
 	background-color: #e2e2e2;
 
@@ -1105,7 +1126,7 @@ input[type=file] {
 		border: 1px solid var(--primary);
 	}
 	.mhelper__item:hover .icon {
-		fill: #f99c30;
+		fill: var(--primary);
 	}
 }
 
@@ -1115,6 +1136,12 @@ input[type=file] {
 	} */
 	.nav__ol {
 		display: none;
+	}
+	.mhelper__item {
+		border: 1px solid var(--primary);
+	}
+	.mhelper__item .icon {
+		fill: var(--primary);
 	}
 }
 
@@ -1131,7 +1158,7 @@ input[type=file] {
 	.flex__col.active {
 		overflow-y: hidden;
 	}
-	.flex__col {
+	.flex__wrapper {
 		width: auto;
 		/* padding: 28px 28px; */
 		/* flex: 0 1; */

@@ -8,7 +8,7 @@
     <link rel="stylesheet" type="text/css" href="styles/plugin.css">
     <link rel="stylesheet" type="text/css" href="styles/global.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="scripts/script.js"></script>
+    <script type="module" src="scripts/script.js"></script>
     <title>Versailles v1.0</title>
 </head>
 
@@ -67,39 +67,41 @@
             <div class="dark-overlay"></div>
             <!-- <div class="price"><span>$79,0000 Purchase Price</span></div> -->
         </div>
-
-        <div class="flex__col active">
-            <h4 class="flex__col__h4">Want To Find Out More?</h4>
-            <p>We're making modern living more accessible by reimagining how we build and buy homes. </p>
-            <br>
-            <p>We’ve rethought the entire process of how we design, build and buy homes. No delays. No headaches. No
-                sticker shock. From design to manufacture to installation, we do it all. </p>
-            <form class="form" action="https://adamscode.com/api/inviro/container" method="POST">
-                <div class="form__wrap form__wrap-col">
-                    <div class="form__wrap">
-                        <label for="address">First Name</label>
-                        <input class="input" type="text" name="address" />
+        <div class="flex__wrapper">
+            <div class="flex__col active">
+                <h4 class="flex__col__h4">Want To Find Out More?</h4>
+                <p>We're making modern living more accessible by reimagining how we build and buy homes. </p>
+                <br>
+                <p>We’ve rethought the entire process of how we design, build and buy homes. No delays. No headaches. No
+                    sticker shock. From design to manufacture to installation, we do it all. </p>
+                <form class="form" action="https://adamscode.com/api/inviro/container" method="POST">
+                    <div class="form__wrap form__wrap-col">
+                        <div class="form__wrap">
+                            <label for="address">First Name</label>
+                            <input class="input" type="text" name="address" />
+                        </div>
+                        <div class="spacer"></div>
+                        <div class="form__wrap">
+                            <label for="address">Last Name</label>
+                            <input class="input" type="text" name="address" />
+                        </div>
                     </div>
-                    <div class="spacer"></div>
+                    <label for="address">Phone Number</label>
                     <div class="form__wrap">
-                        <label for="address">Last Name</label>
-                        <input class="input" type="text" name="address" />
+                        <input class="input" type="text" name="phone" />
                     </div>
-                </div>
-                <label for="address">Phone Number</label>
-                <div class="form__wrap">
-                    <input class="input" type="text" name="phone" />
-                </div>
 
-                <label for="address">Email </label>
-                <div class="form__wrap">
-                    <input class="input" type="text" name="email" />
-                </div>
+                    <label for="address">Email </label>
+                    <div class="form__wrap">
+                        <input class="input" type="text" name="email" />
+                    </div>
 
-                <input class="button button-action" type="submit" value="Contact Me" disabled>
-                <span class="text-center">We won't spam you in any way</span>
-            </form>
+                    <input class="button button--action" type="submit" value="Contact Me" disabled>
+                    <span class="text-center">We won't spam you in any way</span>
+                </form>
+            </div>
         </div>
+
     </div>
 
 </body>
