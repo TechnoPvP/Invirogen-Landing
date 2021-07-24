@@ -1125,9 +1125,49 @@ input[type="submit"],
 } */
 
 /* FIle Upload CUstom ELement */
-input[type=file] {
-	-webkit-appearance: none;
-	outline: none;
+.file {
+	position: absolute;
+	opacity: 0;
+	height: 100%;
+	width: 100%;
+	border: 2px solid yellow;
+
+	z-index: 10;
+
+	cursor: pointer;
+}
+.file:hover + .file__control {
+	background-color: var(--primary);
+	color: white;
+}
+.file__wrapper {
+	position: relative;
+	max-width: 20em;
+	display: inline;
+	width: auto;
+	height: 2em;
+	align-items: center;
+
+	display: flex;
+	cursor: pointer;
+}
+.file__control {
+	flex-grow: 1;
+	position: relative;
+	max-width: 8em;
+	padding: 0.3em 1em;
+	border-radius: 22px;
+	text-align: center;
+	height: auto;
+	color: var(--dark-gray);
+	transition: background-color 0.25s linear, color 0.25s;
+
+	margin-right: 10px;
+
+	/* background-color: var(--primary); */
+	border: 1px solid var(--primary);
+}
+.file__text {
 }
 
 .radio {

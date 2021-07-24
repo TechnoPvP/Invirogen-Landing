@@ -29,6 +29,8 @@ const FormWidget = {
 			}
 		});
 
+		this.onUploadFile();
+
 		this.handleFormSubmission();
 	},
 
@@ -43,6 +45,19 @@ const FormWidget = {
 		}
 		$('#form--billing').addClass('form__wrap--hidden');
 	},
+
+	onUploadFile         : function() {
+		const file = $('.file');
+		const fileText = $('.file__text');
+
+		file.on('change', function(e) {
+			const fileName = $(this).val().replace(/C:\\fakepath\\/i, '');
+
+			fileText.text(fileName);
+		});
+	},
+
+	changeFileText       : function() {},
 
 	getCurrentForm       : function() {
 		return $('.flex__col.active');
