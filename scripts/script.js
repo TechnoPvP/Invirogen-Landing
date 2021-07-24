@@ -2,6 +2,7 @@ import FormWidget from './FormWidget.js';
 import MobileHelper from './MobileHelper.js';
 import ImageSlider from './ImageSlider.js';
 import SidebarWidget from '../scripts/SidebarWidget.js';
+import { onClickBlurOverlay, setBlurOverlayVisible } from '../scripts/Utils.js';
 
 $(document).ready(function() {
 	const NavbarHover = {
@@ -53,7 +54,7 @@ $(document).ready(function() {
 			},
 			closePopup  : function() {
 				se.popupElement.removeClass('active');
-				SidebarWidget.toggleBlur();
+				setBlurOverlayVisible(false);
 			},
 			getPopup    : function(name) {
 				const popupElem = $(`#popup--${name}`);
@@ -65,6 +66,9 @@ $(document).ready(function() {
 				se.tooltip.click((e) => {
 					const clickedTooltipName = e.target.id.split('--')[1];
 					this.togglePopup(clickedTooltipName);
+				});
+				onClickBlurOverlay(() => {
+					this.closePopup();
 				});
 				se.exitElement.on('click', () => {
 					this.closePopup();
@@ -105,7 +109,7 @@ $(document).ready(function() {
 	function initWidgets() {
 		SidebarWidget.init();
 		FormWidget.init();
-		FormWidget.setCurrentForm(2);
+		FormWidget.setCurrentForm(1);
 		NavbarHover.init();
 		Popup().init();
 		TabWidget().init();
