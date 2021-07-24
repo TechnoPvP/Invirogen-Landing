@@ -1,6 +1,8 @@
-import { onClickBlurOverlay } from './Utils.js';
+import { onClickBlurOverlay, setBlurOverlayVisible } from './Utils.js';
 
 const MobileHelper = function() {
+	let active = false;
+
 	const s = {
 		circleGridWrapper : $('.mhelper__grid'),
 		helperButton      : $('.mhelper__button'),
@@ -25,9 +27,7 @@ const MobileHelper = function() {
 			});
 		},
 		toggleDisplay : function() {
-			s.circleGridWrapper.toggleClass('active');
-			s.helperButton.toggleClass('active');
-			s.helperIemWrapper.fadeToggle(250);
+			active ? this.setDisplay(false) : this.setDisplay(true);
 		},
 		// close         : function() {
 		// 	s.circleGridWrapper.removeClass('active');
@@ -42,11 +42,14 @@ const MobileHelper = function() {
 		setDisplay    : function(boolean) {
 			if (boolean) {
 				s.helperIemWrapper.fadeIn(250);
+				active = true;
 			} else {
 				s.helperIemWrapper.fadeOut(250);
+				active = false;
 			}
-			s.circleGridWrapper.addClass('active', boolean);
-			s.helperButton.addClass('active', boolean);
+			s.circleGridWrapper.toggleClass('active', boolean);
+			s.helperButton.toggleClass('active', boolean);
+			setBlurOverlayVisible(boolean);
 		}
 	};
 };

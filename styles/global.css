@@ -41,10 +41,10 @@
 	--fw-heading: bold;
 	--fw-subheading: 400;
 }
-html,
-* {
+*,
+*:before,
+*:after {
 	box-sizing: border-box;
-	scroll-behavior: smooth;
 }
 h1,
 h2,
@@ -183,7 +183,7 @@ a {
 #overlay.active {
 	opacity: 1;
 }
-.blur-overlay {
+#blur-overlay {
 	position: absolute;
 	/* opacity: 0; */
 	display: none;
@@ -195,7 +195,7 @@ a {
 	overflow: hidden;
 	z-index: 900;
 }
-.blur-overlay.active {
+#blur-overlay.active {
 	height: 100%;
 	opacity: 1;
 }
@@ -271,7 +271,9 @@ a {
 .flex__wrapper {
 	position: relative;
 	overflow-y: auto;
-	width: 35%;
+	width: 50em;
+	height: 100%;
+	padding: 0 3em 2em 3em;
 }
 .flex__details {
 	position: absolute;
@@ -279,25 +281,27 @@ a {
 	right: 35px;
 }
 .flex__col {
-	width: 100%;
+	width: auto;
 	height: auto;
 	display: none;
-	padding: 0 2em 2em 2em;
 	position: relative;
 }
 
 .flex__col.active {
 	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+.flex__col--mgtop {
+	margin-top: 2em;
 }
 .flex__col.active.flex__col--center {
-	align-items: center;
 	display: flex;
 	flex-flow: column nowrap;
-	height: auto;
+	height: 60%;
+	align-items: center;
 	justify-content: center;
-	position: absolute;
-	top: 50%;
-	transform: translateY(-80%);
+	text-align: center;
 }
 .flex__col__h4 {
 	margin-bottom: 12px;
@@ -325,7 +329,7 @@ form > label {
 	text-transform: capitalize;
 }
 .form__label {
-	padding-left: 11px;
+	/* padding-left: 11px; */
 }
 .form__wrap {
 	position: relative;
@@ -338,9 +342,6 @@ form > label {
 .form input[type='submit']:focus {
 	outline: none;
 	border: 1px solid var(--dark-gray);
-}
-.form__wrap--mgleft {
-	margin-left: 11px;
 }
 .form__wrap-col {
 	margin-bottom: 0;
@@ -380,10 +381,10 @@ input[type=checkbox]:checked + .form__wrap--hidden {
 .switch {
 	position: relative;
 	max-width: 300px;
-	margin: 5px 0px;
+	margin-top: 5px;
+	margin-bottom: 5px;
 	justify-content: space-around;
 	display: flex;
-
 	align-items: center;
 	height: 35px;
 	padding: 5px 10px;
@@ -478,6 +479,8 @@ input[type=checkbox]:checked + .form__wrap--hidden {
 }
 
 .input {
+	position: relative;
+	left: -11px;
 	border-radius: var(--border-radius);
 	border: none;
 	padding: 10px 20px;
@@ -557,25 +560,34 @@ input[type="submit"],
 .popup {
 	position: absolute;
 	display: none;
+	padding: 1em 2em;
+
 	width: 50%;
 	height: 80%;
-	/* border-radius: var(--border-radius); */
+
 	overflow-y: scroll;
-	padding: 2em 3em;
+	overflow-x: hidden;
+
 	background: rgba(229, 229, 229, 0.30);
 	box-shadow: 0 8px 32px 0 rgba(85, 84, 84, 0.582);
 	backdrop-filter: blur(19.5px);
 	-webkit-backdrop-filter: blur(19.5px);
-	border-radius: 5px;
 	border: 1px solid rgba(255, 255, 255, 0.18);
-	overflow-x: hidden;
+	border-radius: 5px;
 	z-index: 5000;
+	/* border-radius: var(--border-radius); */
 }
 .popup--right {
-	top: 70px;
-	right: 20px;
-	width: 33%;
+	/* top: 70px; */
+	/* right: 20px; */
+	/* width: 50em; */
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	bottom: 0;
+
 	height: 90%;
+	width: 90%;
 }
 .popup--center {
 	top: 50%;
@@ -724,6 +736,7 @@ input[type="submit"],
 	height: 100%;
 	display: block;
 	flex-grow: 1;
+	width: 100%;
 }
 
 .slider--I {
@@ -995,7 +1008,7 @@ input[type="submit"],
 	/* position: absolute; */
 	/* left: 0; */
 	/* right: 140px; */
-	width: 12px;
+	width: 0px;
 	background-color: var(--primary);
 	height: 100%;
 
@@ -1003,7 +1016,7 @@ input[type="submit"],
 }
 .progress__circle__wrapper {
 	position: absolute;
-	top: -6px;
+	top: -3.5px;
 	width: 100%;
 
 	display: flex;
@@ -1013,8 +1026,8 @@ input[type="submit"],
 	/* border: 1px solid green; */
 }
 .progress__circle {
-	width: 15px;
-	height: 15px;
+	width: 10px;
+	height: 10px;
 	border-radius: 50%;
 	background-color: #e2e2e2;
 
@@ -1053,22 +1066,58 @@ input[type="submit"],
 	CIRCLE CHECKBOX BAR RELATED
 	==============================
 */
-input[type=checkbox].circlebox {
+.circlebox {
 	-webkit-appearance: none;
 	overflow: hidden;
-	height: 14px;
-	width: 14px;
+
+	position: relative;
+	max-height: 14px;
+	max-height: 14px;
 	min-width: 14px;
 	min-height: 14px;
+
 	border: 1.5px solid var(--dark-gray);
 	border-radius: 20px;
-	margin: 10px 10px 10px 0px;
+	/* margin: 10px 10px 10px 0px; */
 	padding: 0;
 }
-input[type=checkbox]:checked.circlebox {
+.circlebox:checked {
+	/* background-color: var(--primary); */
+	/* box-shadow: inset 0px 0px 0 2px white; */
 	animation: pulse 2s;
+	/* background-color: var(--primary); */
+}
+.circlebox:checked:before {
+	content: "";
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
 	background-color: var(--primary);
 }
+
+/* 
+.circlebox:checked + .radio-control {
+	position: absolute;
+	padding: 4px;
+	border-radius: 50%;
+	background-color: var(--primary);
+	z-index: -1;
+}
+.circlebox__wrapper {
+	position: relative;
+	border-radius: 50%;
+	display: flex;
+	width: 14px;
+	height: 14px;
+	justify-content: center;
+	align-items: center;
+	margin-right: 10px;
+	margin-top: 2px;
+} */
 
 /* FIle Upload CUstom ELement */
 input[type=file] {
@@ -1079,6 +1128,15 @@ input[type=file] {
 .radio {
 	padding: 0;
 	margin: 0;
+	-webkit-appearance: none;
+	width: 1em;
+	height: 1em;
+	border: 1px solid var(--dark-gray);
+	border-radius: 50%;
+}
+.radio:checked {
+	background-color: var(--primary);
+	box-shadow: inset 0px 0px 0 2px white;
 }
 .radio__span {
 	margin-right: 15px;
@@ -1086,6 +1144,7 @@ input[type=file] {
 
 @-webkit-keyframes pulse {
 	0% {
+		box-shadow: inset 0px 0px 0 2px white;
 		-webkit-box-shadow: 0 0 0 0 rgba(11, 41, 83, 0.4);
 	}
 	70% {
@@ -1154,16 +1213,15 @@ input[type=file] {
 	}
 	.flex {
 		flex-direction: column;
+		/* height: calc(100% - 60px); */
 		height: auto;
-	}
-	.flex__col.active {
-		overflow-y: hidden;
 	}
 	.flex__wrapper {
 		width: auto;
-		/* padding: 28px 28px; */
-		/* flex: 0 1; */
+		overflow-y: hidden;
 	}
+
+	/* Media Query Slider Related */
 	.slider {
 		height: 400px;
 		flex: 1 0;
@@ -1191,18 +1249,26 @@ input[type=file] {
 	.sidebar {
 		width: auto !important;
 	}
-	div.popup {
-		left: 50%;
-		top: 50%;
-		transform: translate(-50%, -50%);
-		height: 85%;
-		width: 85%;
+	.popup .popup--right {
+		/* position: fixed; */
+		/* top: 50%; */
+
+		/* transform: translateY(-50%); */
 		padding: 1em 2.6em;
 	}
 }
 
+/* Small Mobile Screen */
 @media screen and (max-width: 400px) {
 	.slider {
 		height: 350px;
+	}
+	.progress {
+		width: 100%;
+	}
+	.flex__wrapper {
+		/* padding-left: 5%; */
+		/* padding-right: 5%; */
+		padding: 1.5em;
 	}
 }

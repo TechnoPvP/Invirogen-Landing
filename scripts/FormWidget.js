@@ -12,13 +12,13 @@ const FormWidget = {
 	init                 : function() {
 		// console.log('Loaded FormWidget');
 		this.bindUI();
+		this.setCurrentForm(0);
 		Progress().init();
 	},
 
 	bindUI               : function() {
 		this.settings.form.on('input', () => {
 			this.disableButton(this.checkForm());
-			console.log(this.checkForm());
 		});
 		this.settings.radioWrap.on('change', function() {
 			if ($(this).val() == 'yes') {
@@ -128,7 +128,6 @@ const FormWidget = {
 					);
 				} else if (inputElement.attr('type') == 'radio') {
 					if (inputElement.is(':checked')) {
-						console.log(inputElement.attr('value'));
 						window.sessionStorage.setItem(inputElement.attr('name'), inputElement.attr('value'));
 					}
 				} else {
@@ -202,12 +201,12 @@ const Progress = function() {
 		},
 		bindUI             : function() {
 			s.pointsList.click(function() {
-				console.log(FormWidget.checkForm());
+				const index = $(this).data('index');
+				if (index + 1 == s.pointsList.length) return false;
+
 				if ($(this).hasClass('active') || FormWidget.checkForm()) {
-					const parentOffset = $(this).parent().offset();
-					const circleOffset = parentOffset.left - $(this).offset().left;
-					Progress().setCurrentProgress($(this).data('index'));
-					FormWidget.setCurrentForm($(this).data('index'));
+					Progress().setCurrentProgress(index);
+					FormWidget.setCurrentForm(index);
 				} else {
 					alert('Please fill in required information before going forward.');
 				}

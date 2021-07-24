@@ -4,7 +4,7 @@ const SidebarWidget = {
 	settings        : {
 		sidebar     : $('.sidebar'),
 		hamburger   : $('#hamburger'),
-		blurOverlay : $('.blur-overlay')
+		blurOverlay : $('#blur-overlay')
 	},
 	init            : function() {
 		this.bindUI();

@@ -1,8 +1,17 @@
+const blurOverlay = $('#blur-overlay');
+
 const onClickBlurOverlay = (callback) => {
-	$('.blur-overlay').on('click', function(e) {
+	blurOverlay.on('click', function(e) {
 		$(this).fadeOut();
 		callback(e);
 	});
 };
 
-export { onClickBlurOverlay };
+const setBlurOverlayVisible = (boolean) => {
+	if (boolean === null || boolean == undefined) return console.error('Blur overlay must have a value.');
+
+	boolean ? blurOverlay.fadeIn(250) : blurOverlay.fadeOut(250);
+	console.log('blur set');
+};
+
+export { onClickBlurOverlay, setBlurOverlayVisible };
