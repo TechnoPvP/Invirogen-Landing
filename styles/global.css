@@ -916,7 +916,7 @@ input[type="submit"],
 
 	/* TODO Fix This COde */
 	background: rgba(229, 229, 229, 0.30);
-	box-shadow: 0 6px 15px -7px rgba(85, 84, 84, 0.582);
+	box-shadow: 0 6px 11px -7px rgba(85, 84, 84, 0.582);
 	backdrop-filter: blur(19.5px);
 	-webkit-backdrop-filter: blur(19.5px);
 	border-radius: 5px;
