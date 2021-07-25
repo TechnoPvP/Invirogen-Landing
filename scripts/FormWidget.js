@@ -156,6 +156,24 @@ const FormWidget = {
 			}
 		});
 	},
+
+	// TODO THis needs to be handled in the save methods.
+	serlizeSessionData   : function() {
+		const formData = new FormData();
+		const billFileElement = $('#bill_photo');
+
+		for (const sessionKey of Object.keys(window.sessionStorage)) {
+			formData.set(sessionKey, window.sessionStorage.getItem(sessionKey));
+		}
+
+		if (billFileElement.val()) {
+			const billFileName = billFileElement.val().replace(/C:\\fakepath\\/i, '');
+			formData.set('bill_photo', billFileElement.prop('files')[0], billFileName);
+			console.log(billFileName, billFileElement);
+		}
+
+		return formData;
+	},
 	postData             : function(target) {
 		this.saveData();
 		// const testData = {
@@ -167,18 +185,13 @@ const FormWidget = {
 		// };
 
 		// TODO Method 1 implemntation using different forms and sessionStorage.
-		const formData = new FormData();
-		for (const sessionKey of Object.keys(window.sessionStorage)) {
-			formData.set(sessionKey, window.sessionStorage.getItem(sessionKey));
-		}
-		const fileName = $('.file').val().replace(/C:\\fakepath\\/i, '');
-		formData.set('bill_photo', $('.file').prop('files')[0], fileName);
+		const formData = this.serlizeSessionData();
 
 		$.post({
 			cache       : false,
-			dataType    : 'json',
-			// url         : 'https://adamscode.com/api/inviro/solar',
-			url         : 'http://localhost:3000/api/inviro/test',
+			// dataType    : 'json',
+			url         : 'https://adamscode.com/api/inviro/solar',
+			// url         : 'http://localhost:3000/api/inviro/solar',
 			data        : formData,
 			mimeType    : 'mutipart/form-data',
 			crossDomain : true,
