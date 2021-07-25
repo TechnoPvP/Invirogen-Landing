@@ -2,36 +2,36 @@ const FormWidget = {
 	settings             : {
 		valid       : false,
 		currentForm : 0,
-		forms       : $('.flex__col'),
+		forms       : $('#form--main'),
 		formList    : [ ...$('.flex__col') ],
-		form        : $('.form'),
 		visibleForm : $('.form:visible'),
-		radioWrap   : $('.radio__wrapper input[name=other_billing]')
+		radioWrap   : $('.radio__wrapper input[name=other_billing]'),
+		formData    : new FormData()
 	},
 
 	init                 : function() {
 		// console.log('Loaded FormWidget');
 		this.bindUI();
-		this.setCurrentForm(0);
 		Progress().init();
 	},
 
 	bindUI               : function() {
-		this.settings.form.on('input', () => {
-			this.disableButton(this.checkForm());
-		});
-		this.settings.radioWrap.on('change', function() {
-			if ($(this).val() == 'yes') {
-				FormWidget.setBillingAddress(true);
-				console.log('Set billing address true');
-			} else {
-				FormWidget.setBillingAddress(false);
-			}
-		});
-
-		this.onUploadFile();
+		// this.settings.form.on('input', () => {
+		// 	this.disableButton(this.checkForm());
+		// });
 
 		this.handleFormSubmission();
+
+		// this.settings.radioWrap.on('change', function() {
+		// 	if ($(this).val() == 'yes') {
+		// 		FormWidget.setBillingAddress(true);
+		// 		console.log('Set billing address true');
+		// 	} else {
+		// 		FormWidget.setBillingAddress(false);
+		// 	}
+		// });
+
+		// this.onUploadFile();
 	},
 
 	disableButton        : function(boolean) {
@@ -64,15 +64,13 @@ const FormWidget = {
 	},
 
 	getNextForm          : function() {
-		if (this.settings.currentForm >= this.settings.forms.length) {
+		if (this.settings.currentForm >= this.settings.formList.length) {
 			return console.error('Cant go further');
 		}
 
 		this.settings.currentForm = this.settings.currentForm += 1;
 		this.setCurrentForm(this.settings.currentForm);
 		// const formElement = $(this.settings.forms[this.settings.currentForm]);
-
-		// this.saveData();
 
 		// // Duplicate Code Fix DRY.
 		// this.getCurrentForm().removeClass('active');
@@ -94,29 +92,12 @@ const FormWidget = {
 		formAtIndex.addClass('active');
 	},
 
-	handleFormSubmission : function() {
-		this.settings.forms.each((index, elem) => {
-			$(elem).on('submit', function(e) {
-				e.preventDefault();
-
-				const buttonValue = $(elem).find('input[type=submit]').val();
-				if (buttonValue == 'Submit') {
-					FormWidget.postData($(e.target));
-				} else {
-					FormWidget.getNextForm();
-
-					// TODO Implement progress next
-				}
-			});
-		});
-	},
-
 	showNextForm         : function() {
 		this.getCurrentForm().removeClass('active');
 		this.getNextForm().addClass('active');
 
 		// Check form inputs and set button disabled prop accordingly
-		this.disableButton(this.checkForm());
+		// this.disableButton(this.checkForm());
 	},
 	checkForm            : function() {
 		let isFormValid = false;
@@ -131,22 +112,61 @@ const FormWidget = {
 		});
 		return isFormValid;
 	},
+	handleFormSubmission : function() {
+		// this.settings.forms.each((index, elem) => {
+		$('#form--main').on('submit', function(elem) {
+			elem.preventDefault();
+
+			const visibleButton = $('.button--action:visible');
+
+			if (visibleButton.val() == 'Next') {
+				FormWidget.getNextForm();
+			} else {
+				// let formData = new FormData(this);
+				FormWidget.postData(FormWidget.settings.formData);
+				console.log('Attempted to post data.');
+			}
+
+			// const buttonValue = $(elem).find('input[type=submit]:visible').val();
+			// if (buttonValue == 'Submit') {
+			// 	FormWidget.postData($(elem.target), $(elem));
+			// } else {
+			// 	FormWidget.getNextForm();
+
+			// 	// 	// TODO Implement progress next
+			// }
+		});
+		// });
+	},
 	saveData             : function() {
 		this.getCurrentForm().find('input').each(function(index, elem) {
 			const inputVal = $(elem).val();
 			const inputElement = $(elem);
-			if (inputVal != null && inputVal != undefined && $(elem).attr('type') != 'submit') {
+
+			if (inputVal != null && inputVal != undefined && inputElement.attr('type') != 'submit') {
 				if (inputElement.attr('name') === 'property_type') {
-					window.sessionStorage.setItem(
+					// window.sessionStorage.setItem(
+					// 	inputElement.attr('name'),
+					// 	inputElement.prop('checked') ? 'commercial' : 'residential'
+					// );
+
+					FormWidget.settings.formData.append(
 						inputElement.attr('name'),
 						inputElement.prop('checked') ? 'commercial' : 'residential'
 					);
 				} else if (inputElement.attr('type') == 'radio') {
 					if (inputElement.is(':checked')) {
-						window.sessionStorage.setItem(inputElement.attr('name'), inputElement.attr('value'));
+						// window.sessionStorage.setItem(inputElement.attr('name'), inputElement.attr('value'));
+						FormWidget.settings.formData.append(inputElement.attr('name'), inputElement.attr('value'));
 					}
+				} else if (inputElement.attr('type') == 'file') {
+					FormWidget.settings.formData.append(inputElement.attr('name'), $(elem).prop('files')[0], inputVal);
 				} else {
-					window.sessionStorage.setItem(
+					// window.sessionStorage.setItem(
+					// 	inputElement.attr('name'),
+					// 	inputElement.is(':checkbox') ? inputElement.prop('checked') : inputVal
+					// );
+					FormWidget.settings.formData.append(
 						inputElement.attr('name'),
 						inputElement.is(':checkbox') ? inputElement.prop('checked') : inputVal
 					);
@@ -154,7 +174,7 @@ const FormWidget = {
 			}
 		});
 	},
-	postData             : function(target) {
+	postData             : function(form) {
 		this.saveData();
 		// const testData = {
 		// 	electric_bill          : 190,
@@ -164,18 +184,30 @@ const FormWidget = {
 		// 	address                : '1020 Property Adddress'
 		// };
 
+		// console.log('Attempted To Save Form Data');
+		// for (var pair of this.settings.formData.entries()) {
+		// 	console.log(pair[0] + ', ' + pair[1]);
+		// }
+
+		// let sessionStorageKeys = Object.keys(sessionStorage);
+
+		// for (let key of sessionStorageKeys) {
+		// 	formData.append(key, sessionStorage.getItem(key));
+		// }
+		// formData.append('file', $('#bill_file').prop('files')[0]);
 		$.post({
 			cache       : false,
 			dataType    : 'json',
-			url         : 'https://adamscode.com/api/inviro/solar',
-			// url         : 'http://localhost:3000/api/inviro/solar',
-			data        : JSON.stringify(window.sessionStorage),
-			enctype     : 'mutipart/form-data',
+			// url         : 'https://adamscode.com/api/inviro/solar',
+			url         : 'http://localhost:3000/api/inviro/test',
+			data        : form,
+			mimeType    : 'multipart/form-data',
 			crossDomain : true,
-			contentType : 'application/json',
+			processData : false,
+			contentType : false,
 			method      : 'POST',
 			headers     : {
-				accept                        : 'application/json',
+				// accept                        : 'application/json',
 				'Access-Control-Allow-Origin' : '*'
 			},
 			success     : () => {
@@ -185,7 +217,7 @@ const FormWidget = {
 			},
 			error       : function(e) {
 				console.table(e);
-				window.location.href = '/solar.html';
+				// window.location.href = '/solar.html';
 			}
 		});
 	}
@@ -213,6 +245,7 @@ const Progress = function() {
 	return {
 		init               : function() {
 			this.bindUI();
+			this.setCurrentProgress(0);
 		},
 		bindUI             : function() {
 			s.pointsList.click(function() {
@@ -247,4 +280,5 @@ const Progress = function() {
 		}
 	};
 };
+
 export default FormWidget;

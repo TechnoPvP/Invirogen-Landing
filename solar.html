@@ -20,6 +20,7 @@
 <body>
 
     <div id="blur-overlay"></div>
+
     <div class="sidebar-container">
         <div class="sidebar">
             <div class="sidebar__flex">
@@ -31,6 +32,7 @@
             </div>
         </div>
     </div>
+
     <div class="mhelper">
         <div class="mhelper__items-wrapper active">
             <div class="mhelper__item"><a class="mhelper__item__a" href="tel:4079246902"><svg class="icon"
@@ -52,6 +54,7 @@
                     </svg>
                 </a></div>
         </div>
+
         <div class="mhelper__button">
             <div class="mhelper__grid">
                 <div class="mhelper__circle"></div>
@@ -65,11 +68,15 @@
                 <div class="mhelper__circle"></div>
             </div>
         </div>
+
     </div>
+
     <nav class="nav">
         <div id="overlay"></div>
+
         <a href="/versailles.html"><img class="logo" src="assets/inviro_logo.png"
                 alt="Invirogen logo written in all black"></a>
+
         <ol class="nav__ol">
             <li class="nav__li"><a class="nav__a" href="/solar.html"><span>Solar <div class="nav__underline"></div>
                     </span></a></li>
@@ -79,6 +86,7 @@
                 </a>
             </li>
         </ol>
+
         <div class="up" id="hamburger">
             <span></span>
             <span></span>
@@ -88,6 +96,7 @@
     </nav>
 
     <div class="flex">
+
         <div class="slider">
             <div class="slide active"><img src="/assets/solar/Modern Home With Solar Panels.jpg"></div>
             <div class="slide"><img src="/assets/solar/Solar Panel Roof Beauty Shot.jpg"></div>
@@ -103,7 +112,8 @@
             <div class="dark-overlay"></div>
         </div>
 
-        <div class="flex__wrapper">
+        <form id="form--main" action="http://localhost:3000/api/inviro/test" method="POST" class="flex__wrapper">
+
             <div class="progress">
                 <div class="progress__line"></div>
                 <div class="progress__circle__wrapper">
@@ -143,85 +153,84 @@
                     Let us start by providing you with a <span class="text--boldblue">Free No-Obligation Quote.</span>
                 </p>
 
-                <form class="form">
-                    <div class="form__wrap">
-                        <label for="property_type">Are you interested in solar for a residential or commerical
-                            property?</label>
-                        <div class="switch input">
-                            <input class="switch-input" type="checkbox" name="property_type" />
-                            <span class="switch__first">Residential</span>
-                            <span class="switch__second">Commerical</span>
-                            <div class="switch-handle"></div>
-                        </div>
+                <!-- <form class="form"> -->
+                <div class="form__wrap">
+                    <label for="property_type">Are you interested in solar for a residential or commerical
+                        property?</label>
+                    <div class="switch input">
+                        <input class="switch-input" type="checkbox" name="property_type" />
+                        <span class="switch__first">Residential</span>
+                        <span class="switch__second">Commerical</span>
+                        <div class="switch-handle"></div>
                     </div>
+                </div>
 
-                    <div class="form__wrap">
-                        <label for="own_property">Do you own the property where solar will be
-                            installed?</label>
-                        <div class="radio__wrapper form__wrap--button ">
-                            <input class="radio" type="radio" name="own_property" value="yes" />
-                            <label class="radio__span">Yes </label>
-                            <input class="radio" type="radio" name="own_property" value="no" />
-                            <label class="radio__span"> No</label>
-                        </div>
+                <div class="form__wrap">
+                    <label for="own_property">Do you own the property where solar will be
+                        installed?</label>
+                    <div class="radio__wrapper form__wrap--button ">
+                        <input class="radio" type="radio" name="own_property" value="yes" />
+                        <label class="radio__span">Yes </label>
+                        <input class="radio" type="radio" name="own_property" value="no" />
+                        <label class="radio__span"> No</label>
                     </div>
+                </div>
 
 
-                    <div class="form__wrap ">
-                        <label for="address" class="form__label">Property Address <i
-                                style="font-weight: normal">(Installation)</i> </label>
-                        <input id="autocomplete" class="input" type="text" name="address" autocomplete="off" required />
-                    </div>
-                    <div class="form__wrap">
-                        <input type="submit" value="Next" class="button button--action" disabled>
-                    </div>
-                </form>
+                <div class="form__wrap ">
+                    <label for="address" class="form__label">Property Address <i
+                            style="font-weight: normal">(Installation)</i> </label>
+                    <input id="autocomplete" class="input" type="text" name="property_address" autocomplete="off" />
+                </div>
+                <div class="form__wrap">
+                    <input type="submit" value="Next" class="button button--action">
+                </div>
+                <!-- </form> -->
                 <!-- <div class="flex__details"><a href="#" class="text__subheading">Details</a></div> -->
             </div>
-
-
-
 
             <!-- 
                 ================================
                             Form 2
                 ===================================
                 -->
+
             <div class="flex__col">
-                <form class="form">
+                <!-- <form class="form"> -->
 
-                    <div class="form__wrap">
-                        <label for="addtional_improvements">Will you be making any additional improvements to this
-                            property?</label>
-                        <div class="radio__wrapper form__wrap--button ">
-                            <input class="radio" type="radio" name="addtional_improvements" value='yes' />
-                            <label class="radio__span">Yes </label>
-                            <input class="radio" type="radio" name="addtional_improvements" value='no' />
-                            <label class="radio__span"> No</label>
-                        </div>
+                <div class="form__wrap">
+                    <label for="additional_improvements">Will you be making any additional improvements to this
+                        property?</label>
+                    <div class="radio__wrapper form__wrap--button ">
+                        <input class="radio" type="radio" name="additional_improvements" value='yes' />
+                        <label class="radio__span">Yes </label>
+                        <input class="radio" type="radio" name="additional_improvements" value='no' />
+                        <label class="radio__span"> No</label>
                     </div>
+                </div>
 
-                    <div class="form__wrap">
-                        <label class="form__label" for="electric_bill">Average Electric Payment</label>
-                        <input class="input" type="text" name="electric_bill" required />
-                        <div class="form__placeholder">/ mo</div>
-                    </div>
+                <div class="form__wrap">
+                    <label class="form__label" for="electric_bill">Average Electric Payment</label>
+                    <input class="input" type="text" name="electric_bill" />
+                    <div class="form__placeholder">/ mo</div>
+                </div>
 
-                    <div class="form__wrap">
-                        <label class="form__label" for="bill_photo">Recent electric bill<span class="text--igray">
-                                (Optional)</span>
-                        </label>
-                        <div class="file__wrapper">
-                            <input class="file" type="file" name="bill_photo" />
+                <div class="form__wrap">
+                    <label class="form__label" for="bill_photo">Recent electric bill<span class="text--igray">
+                            (Optional)</span>
+                    </label>
+                    <!-- <div class="file__wrapper">
+                            <input id="file" class="file" type="file" name="bill_photo" />
                             <div class="file__control">Upload</div>
                             <span class="file__text">No File uploaded</span>
-                        </div>
-                    </div>
+                        </div> -->
+                    <input type="file" name="bill_photo" id="bill_file">
+                </div>
 
-                    <div class="form__wrap">
-                        <input type="submit" value="Next" class="button button--action" disabled>
-                    </div>
-                </form>
+                <div class="form__wrap">
+                    <input type="submit" value="Next" class="button button--action">
+                </div>
+                <!-- </form> -->
                 <!-- <div class="flex__details"><a href="#" class="text__subheading">Details</a></div> -->
             </div>
 
@@ -235,64 +244,70 @@
                 <p>Please provide the following information to send you a <span class="text--boldblue">free
                         no-obligation
                         quote</span></p>
-                <form method="POST" name="solar" class="form">
-                    <div class="form__wrap form__wrap-col">
-                        <div class="form__wrap">
-                            <label class="form__label" for="first">First Name</label>
-                            <input class="input" type="text" name="first" required />
-                        </div>
-                        <div class="spacer"></div>
-                        <div class="form__wrap">
-                            <label class="form__label" for="last">Last Name</label>
-                            <input class="input" type="text" name="last" required />
-                        </div>
-                    </div>
+                <!-- <form method="POST" name="solar" class="form"> -->
+                <div class="form__wrap form__wrap-col">
                     <div class="form__wrap">
-                        <label class="form__label" for="phone">Phone Number</label>
-                        <input class="input" type="tel" name="phone" />
+                        <label class="form__label" for="first">First Name</label>
+                        <input class="input" type="text" name="first" />
                     </div>
+
+                    <div class="spacer"></div>
 
                     <div class="form__wrap">
-                        <label class="form__label" for="email">Email</label>
-                        <input class="input" type="email" name="email" required />
+                        <label class="form__label" for="last">Last Name</label>
+                        <input class="input" type="text" name="last" />
                     </div>
 
+                </div>
 
-                    <div class="form__wrap form__wrap--mgbtm">
-                        <label for="phone">Is their a different mailing/billing address?</label>
-                        <div class="radio__wrapper form__wrap--button ">
-                            <input class="radio" type="radio" name="other_billing" value="yes" />
-                            <label class="radio__span">Yes </label>
-                            <input class="radio" type="radio" name="other_billing" value="no" />
-                            <label class="radio__span"> No</label>
-                        </div>
-                    </div>
-                    <div id="form--billing" class="form__wrap form__wrap--hidden">
-                        <label for="address">Mailing/Billing Address</label>
-                        <input id="autocomplete" class="input " type="text" name="billing_address" autocomplete="off" />
-                    </div>
-                    <div class="form__wrap">
-                        <label class="form__label" for="email">Quote/Refrence ID <span
-                                class="text--iblue">(Optional)</span></label>
-                        <input class="input" type="text" name="email" />
-                    </div>
+                <div class="form__wrap">
+                    <label class="form__label" for="phone">Phone Number</label>
+                    <input class="input" type="tel" name="phone" />
+                </div>
 
+                <div class="form__wrap">
+                    <label class="form__label" for="email">Email</label>
+                    <input class="input" type="email" name="email" />
+                </div>
 
-                    <div class="form__wrap form__wrap--inline form__wrap--mgbtm">
-                        <!-- <span class="circlebox__wrapper"> -->
-                        <!-- TODO Removed style="margin-top: 2px;" -->
-                        <input type="checkbox" class="circlebox" name="terms_agreed" autocomplete="off" required />
-                        <!-- <span class="radio-control"></span> -->
-                        <!-- </span> -->
-                        <label for="address">I agree to the <span id="tooltip--terms" class="tooltip">Terms and
-                                Condtions
-                            </span> of Invirogen to receive a Free No-Obligation Quote
-                        </label>
+                <div class="form__wrap form__wrap--mgbtm">
+                    <label for="phone">Is their a different mailing/billing address?</label>
+                    <div class="radio__wrapper form__wrap--button ">
+                        <input class="radio" type="radio" name="other_billing" value="yes" />
+                        <label class="radio__span">Yes </label>
+                        <input class="radio" type="radio" name="other_billing" value="no" />
+                        <label class="radio__span"> No</label>
                     </div>
-                    <div class="form__wrap ">
-                        <input class="button button--action" type="submit" value="Submit" disabled>
-                    </div>
-                </form>
+                </div>
+
+                <div id="form--billing" class="form__wrap form__wrap--hidden">
+                    <label for="address">Mailing/Billing Address</label>
+                    <input id="autocomplete" class="input " type="text" name="billing_address" autocomplete="off" />
+                </div>
+
+                <div class="form__wrap">
+                    <label class="form__label" for="refrenceId">Quote/Refrence ID <span
+                            class="text--iblue">(Optional)</span></label>
+                    <input class="input" type="text" name="refrenceId" />
+                </div>
+
+                <div class="form__wrap form__wrap--inline form__wrap--mgbtm">
+                    <!-- <span class="circlebox__wrapper"> -->
+                    <!-- TODO Removed style="margin-top: 2px;" -->
+                    <input type="checkbox" class="circlebox" name="terms_agreed" autocomplete="off" />
+                    <!-- <span class="radio-control"></span> -->
+                    <!-- </span> -->
+                    <label for="terms__agreed">I agree to the <span id="tooltip--terms" class="tooltip">Terms and
+                            Condtions
+                        </span> of Invirogen to receive a Free No-Obligation Quote
+                    </label>
+                </div>
+
+                <div class="form__wrap ">
+                    <input id="form--submit" class="button button--action" type="submit" value="Submit">
+                </div>
+
+                <!-- </form> -->
             </div>
 
             <!-- Thank You Page -->
@@ -499,10 +514,11 @@
                 </p>
             </div>
 
-        </div>
+        </form>
 
 
     </div>
+
     </div>
     <div id="popup--faq" class="popup">
         <!-- <div class="popup__x"></div> -->
