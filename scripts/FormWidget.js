@@ -16,9 +16,9 @@ const FormWidget = {
 	},
 
 	bindUI               : function() {
-		// this.settings.form.on('input', () => {
-		// 	this.disableButton(this.checkForm());
-		// });
+		$('.flex__col.active').on('input', () => {
+			this.disableButton(this.checkForm());
+		});
 
 		this.handleFormSubmission();
 
@@ -57,8 +57,6 @@ const FormWidget = {
 		});
 	},
 
-	changeFileText       : function() {},
-
 	getCurrentForm       : function() {
 		return $('.flex__col.active');
 	},
@@ -91,14 +89,6 @@ const FormWidget = {
 		this.getCurrentForm().removeClass('active');
 		formAtIndex.addClass('active');
 	},
-
-	showNextForm         : function() {
-		this.getCurrentForm().removeClass('active');
-		this.getNextForm().addClass('active');
-
-		// Check form inputs and set button disabled prop accordingly
-		// this.disableButton(this.checkForm());
-	},
 	checkForm            : function() {
 		let isFormValid = false;
 
@@ -107,7 +97,6 @@ const FormWidget = {
 				isFormValid = false;
 				return false;
 			}
-			// If it hasn't returned false by here than the form is valid.
 			isFormValid = true;
 		});
 		return isFormValid;
@@ -126,47 +115,27 @@ const FormWidget = {
 				FormWidget.postData(FormWidget.settings.formData);
 				console.log('Attempted to post data.');
 			}
-
-			// const buttonValue = $(elem).find('input[type=submit]:visible').val();
-			// if (buttonValue == 'Submit') {
-			// 	FormWidget.postData($(elem.target), $(elem));
-			// } else {
-			// 	FormWidget.getNextForm();
-
-			// 	// 	// TODO Implement progress next
-			// }
 		});
-		// });
 	},
 	saveData             : function() {
 		this.getCurrentForm().find('input').each(function(index, elem) {
 			const inputVal = $(elem).val();
 			const inputElement = $(elem);
 
-			if (inputVal != null && inputVal != undefined && inputElement.attr('type') != 'submit') {
+			if (inputVal && inputElement.attr('type') != 'submit') {
 				if (inputElement.attr('name') === 'property_type') {
-					// window.sessionStorage.setItem(
-					// 	inputElement.attr('name'),
-					// 	inputElement.prop('checked') ? 'commercial' : 'residential'
-					// );
-
-					FormWidget.settings.formData.append(
+					FormWidget.settings.formData.set(
 						inputElement.attr('name'),
 						inputElement.prop('checked') ? 'commercial' : 'residential'
 					);
 				} else if (inputElement.attr('type') == 'radio') {
 					if (inputElement.is(':checked')) {
-						// window.sessionStorage.setItem(inputElement.attr('name'), inputElement.attr('value'));
-						FormWidget.settings.formData.append(inputElement.attr('name'), inputElement.attr('value'));
+						FormWidget.settings.formData.set(inputElement.attr('name'), inputElement.attr('value'));
 					}
 				} else if (inputElement.attr('type') == 'file') {
-					FormWidget.settings.formData.append(inputElement.attr('name'), $(elem).prop('files')[0], inputVal);
+					FormWidget.settings.formData.set(inputElement.attr('name'), $(elem).prop('files')[0], inputVal);
 				} else {
-					// window.sessionStorage.setItem(
-					// 	inputElement.attr('name'),
-					// 	inputElement.is(':checkbox') ? inputElement.prop('checked') : inputVal
-					// );
-					FormWidget.settings.formData.append(
+					FormWidget.settings.formData.set(
 						inputElement.attr('name'),
 						inputElement.is(':checkbox') ? inputElement.prop('checked') : inputVal
 					);

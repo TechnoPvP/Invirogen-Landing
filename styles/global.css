@@ -286,6 +286,9 @@ a {
 	display: none;
 	position: relative;
 }
+.flex__col__head {
+	margin: 2em 0;
+}
 
 .flex__col.active {
 	display: block;
