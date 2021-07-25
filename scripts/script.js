@@ -109,7 +109,6 @@ $(document).ready(function() {
 	function initWidgets() {
 		SidebarWidget.init();
 		FormWidget.init();
-		FormWidget.setCurrentForm(1);
 		NavbarHover.init();
 		Popup().init();
 		TabWidget().init();

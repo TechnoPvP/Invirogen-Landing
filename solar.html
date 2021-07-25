@@ -159,7 +159,7 @@
                         <label for="own_property">Do you own the property where solar will be
                             installed?</label>
                         <div class="radio__wrapper form__wrap--button ">
-                            <input class="radio" type="radio" name="own_property" value="yes" />
+                            <input class="radio" type="radio" name="own_property" value="yes" required />
                             <label class="radio__span">Yes </label>
                             <input class="radio" type="radio" name="own_property" value="no" />
                             <label class="radio__span"> No</label>
@@ -170,10 +170,11 @@
                     <div class="form__wrap ">
                         <label for="address" class="form__label">Property Address <i
                                 style="font-weight: normal">(Installation)</i> </label>
-                        <input id="autocomplete" class="input" type="text" name="address" autocomplete="off" required />
+                        <input id="autocomplete" class="input" type="text" name="property_address" autocomplete="off"
+                            required />
                     </div>
                     <div class="form__wrap">
-                        <input type="submit" value="Next" class="button button--action" disabled>
+                        <input type="submit" value="Next" class="button button--action">
                     </div>
                 </form>
                 <!-- <div class="flex__details"><a href="#" class="text__subheading">Details</a></div> -->
@@ -194,9 +195,9 @@
                         <label for="addtional_improvements">Will you be making any additional improvements to this
                             property?</label>
                         <div class="radio__wrapper form__wrap--button ">
-                            <input class="radio" type="radio" name="addtional_improvements" value='yes' />
+                            <input class="radio" type="radio" name="additional_improvements" value='yes' required />
                             <label class="radio__span">Yes </label>
-                            <input class="radio" type="radio" name="addtional_improvements" value='no' />
+                            <input class="radio" type="radio" name="additional_improvements" value='no' />
                             <label class="radio__span"> No</label>
                         </div>
                     </div>
@@ -219,7 +220,7 @@
                     </div>
 
                     <div class="form__wrap">
-                        <input type="submit" value="Next" class="button button--action" disabled>
+                        <input type="submit" value="Next" class="button button--action">
                     </div>
                 </form>
                 <!-- <div class="flex__details"><a href="#" class="text__subheading">Details</a></div> -->
@@ -272,9 +273,9 @@
                         <input id="autocomplete" class="input " type="text" name="billing_address" autocomplete="off" />
                     </div>
                     <div class="form__wrap">
-                        <label class="form__label" for="email">Quote/Refrence ID <span
+                        <label class="form__label" for="refrenceId">Quote/Refrence ID <span
                                 class="text--iblue">(Optional)</span></label>
-                        <input class="input" type="text" name="email" />
+                        <input class="input" type="text" name="refrenceId" />
                     </div>
 
 
@@ -290,7 +291,7 @@
                         </label>
                     </div>
                     <div class="form__wrap ">
-                        <input class="button button--action" type="submit" value="Submit" disabled>
+                        <input class="button button--action" type="submit" value="Submit">
                     </div>
                 </form>
             </div>

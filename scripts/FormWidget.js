@@ -5,37 +5,43 @@ const FormWidget = {
 		forms       : $('.flex__col'),
 		formList    : [ ...$('.flex__col') ],
 		form        : $('.form'),
-		visibleForm : $('.form:visible'),
-		radioWrap   : $('.radio__wrapper input[name=other_billing]')
+		visibleForm : $('.form:visible')
 	},
 
 	init                 : function() {
 		// console.log('Loaded FormWidget');
 		this.bindUI();
-		this.setCurrentForm(0);
 		Progress().init();
 	},
 
 	bindUI               : function() {
-		this.settings.form.on('input', () => {
-			this.disableButton(this.checkForm());
-		});
-		this.settings.radioWrap.on('change', function() {
-			if ($(this).val() == 'yes') {
-				FormWidget.setBillingAddress(true);
-				console.log('Set billing address true');
-			} else {
-				FormWidget.setBillingAddress(false);
-			}
-		});
+		// TODO May remove this feature to show which inputs need to be valid.
+
+		// this.settings.form.on('input', () => {
+		// 	this.disableButton(this.checkForm());
+		// });
 
 		this.onUploadFile();
+
+		this.onBillingInputChange();
 
 		this.handleFormSubmission();
 	},
 
 	disableButton        : function(boolean) {
 		this.getCurrentForm().find('.button--action').prop('disabled', boolean ? false : true);
+	},
+
+	onBillingInputChange : function() {
+		const radioWrap = $('.radio__wrapper input[name=other_billing]');
+
+		radioWrap.on('change', function() {
+			if ($(this).val() == 'yes') {
+				FormWidget.setBillingAddress(true);
+			} else {
+				FormWidget.setBillingAddress(false);
+			}
+		});
 	},
 
 	setBillingAddress    : function(boolean) {
@@ -69,16 +75,9 @@ const FormWidget = {
 		}
 
 		this.settings.currentForm = this.settings.currentForm += 1;
-		this.setCurrentForm(this.settings.currentForm);
-		// const formElement = $(this.settings.forms[this.settings.currentForm]);
+		const nextForm = this.setCurrentForm(this.settings.currentForm);
 
-		// this.saveData();
-
-		// // Duplicate Code Fix DRY.
-		// this.getCurrentForm().removeClass('active');
-		// formElement.addClass('active');
-
-		return $(this.settings.forms[this.settings.currentForm]);
+		return nextForm;
 	},
 
 	setCurrentForm       : function(index) {
@@ -92,16 +91,19 @@ const FormWidget = {
 
 		this.getCurrentForm().removeClass('active');
 		formAtIndex.addClass('active');
+
+		return formAtIndex;
 	},
 
 	handleFormSubmission : function() {
-		this.settings.forms.each((index, elem) => {
-			$(elem).on('submit', function(e) {
-				e.preventDefault();
+		this.settings.forms.each((index, formElement) => {
+			$(formElement).on('submit', function(submitHandler) {
+				submitHandler.preventDefault();
 
-				const buttonValue = $(elem).find('input[type=submit]').val();
+				const buttonValue = $(formElement).find('input[type=submit]').val();
 				if (buttonValue == 'Submit') {
-					FormWidget.postData($(e.target));
+					FormWidget.postData();
+					console.log('Attempting to submit');
 				} else {
 					FormWidget.getNextForm();
 
@@ -121,7 +123,7 @@ const FormWidget = {
 	checkForm            : function() {
 		let isFormValid = false;
 
-		this.getCurrentForm().find('input[required]').each(function(index, elem) {
+		$('.form:visible').find('input[required]').each(function(index, elem) {
 			if ($(elem).is(':invalid')) {
 				isFormValid = false;
 				return false;
@@ -164,18 +166,28 @@ const FormWidget = {
 		// 	address                : '1020 Property Adddress'
 		// };
 
+		// TODO Method 1 implemntation using different forms and sessionStorage.
+		const formData = new FormData();
+		for (const sessionKey of Object.keys(window.sessionStorage)) {
+			formData.set(sessionKey, window.sessionStorage.getItem(sessionKey));
+		}
+		const fileName = $('.file').val().replace(/C:\\fakepath\\/i, '');
+		formData.set('bill_photo', $('.file').prop('files')[0], fileName);
+
 		$.post({
 			cache       : false,
 			dataType    : 'json',
-			url         : 'https://adamscode.com/api/inviro/solar',
-			// url         : 'http://localhost:3000/api/inviro/solar',
-			data        : JSON.stringify(window.sessionStorage),
-			enctype     : 'mutipart/form-data',
+			// url         : 'https://adamscode.com/api/inviro/solar',
+			url         : 'http://localhost:3000/api/inviro/test',
+			data        : formData,
+			mimeType    : 'mutipart/form-data',
 			crossDomain : true,
-			contentType : 'application/json',
+			processData : false,
+			contentType : false,
+			// contentType : 'application/json',
 			method      : 'POST',
 			headers     : {
-				accept                        : 'application/json',
+				// accept                        : 'application/json',
 				'Access-Control-Allow-Origin' : '*'
 			},
 			success     : () => {
@@ -184,7 +196,7 @@ const FormWidget = {
 				console.log('Sucessful post');
 			},
 			error       : function(e) {
-				console.table(e);
+				console.log(e.status, e.statusText, e.responseText);
 				window.location.href = '/solar.html';
 			}
 		});
@@ -213,6 +225,7 @@ const Progress = function() {
 	return {
 		init               : function() {
 			this.bindUI();
+			this.setCurrentProgress(0);
 		},
 		bindUI             : function() {
 			s.pointsList.click(function() {
