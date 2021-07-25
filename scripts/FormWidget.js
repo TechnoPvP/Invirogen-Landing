@@ -163,7 +163,8 @@ const FormWidget = {
 		const billFileElement = $('#bill_photo');
 
 		for (const sessionKey of Object.keys(window.sessionStorage)) {
-			formData.set(sessionKey, window.sessionStorage.getItem(sessionKey));
+			if (window.sessionStorage.getItem(sessionKey) && window.sessionStorage.getItem(sessionKey).length != 0)
+				formData.set(sessionKey, window.sessionStorage.getItem(sessionKey));
 		}
 
 		if (billFileElement.val()) {
