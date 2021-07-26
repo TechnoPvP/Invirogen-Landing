@@ -189,12 +189,16 @@ const FormWidget = {
 		const formData = this.serlizeSessionData();
 
 		var request = new XMLHttpRequest();
-		request.open('POST', 'http://localhost:3000/api/inviro/solar');
+		request.open('POST', 'http://adamscode.com/api/inviro/solar');
 		request.onload = function(oEvent) {
+			if (request.readyState === 4) {
+				alert(request.response);
+			}
+
 			if (request.status == 200) {
 				console.log('Uploaded');
 			} else {
-				console.log((request.status = ' error occures while uploading file.'));
+				alert(request.status + ' error occures while uploading file.');
 			}
 		};
 
