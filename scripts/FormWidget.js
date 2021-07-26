@@ -188,32 +188,44 @@ const FormWidget = {
 		// TODO Method 1 implemntation using different forms and sessionStorage.
 		const formData = this.serlizeSessionData();
 
-		$.post({
-			cache       : false,
-			// dataType    : 'json',
-			url         : 'https://adamscode.com/api/inviro/solar',
-			// url         : 'http://localhost:3000/api/inviro/solar',
-			data        : formData,
-			mimeType    : 'mutipart/form-data',
-			crossDomain : true,
-			processData : false,
-			contentType : false,
-			// contentType : 'application/json',
-			method      : 'POST',
-			headers     : {
-				// accept                        : 'application/json',
-				'Access-Control-Allow-Origin' : '*'
-			},
-			success     : () => {
-				this.getNextForm();
-				Progress().disableClick();
-				console.log('Sucessful post');
-			},
-			error       : function(e) {
-				console.log(e.status, e.statusText, e.responseText);
-				window.location.href = '/solar.html';
+		var request = new XMLHttpRequest();
+		request.open('POST', 'http://localhost:3000/api/inviro/solar');
+		request.onload = function(oEvent) {
+			if (request.status == 200) {
+				console.log('Uploaded');
+			} else {
+				console.log((request.status = ' error occures while uploading file.'));
 			}
-		});
+		};
+
+		request.send(formData);
+
+		// $.post({
+		// 	cache       : false,
+		// 	// dataType    : 'json',
+		// 	url         : 'https://adamscode.com/api/inviro/solar',
+		// 	// url         : 'http://localhost:3000/api/inviro/solar',
+		// 	data        : formData,
+		// 	mimeType    : 'mutipart/form-data',
+		// 	crossDomain : true,
+		// 	processData : false,
+		// 	contentType : false,
+		// 	// contentType : 'application/json',
+		// 	method      : 'POST',
+		// 	headers     : {
+		// 		// accept                        : 'application/json',
+		// 		'Access-Control-Allow-Origin' : '*'
+		// 	},
+		// 	success     : () => {
+		// 		this.getNextForm();
+		// 		Progress().disableClick();
+		// 		console.log('Sucessful post');
+		// 	},
+		// 	error       : function(e) {
+		// 		console.log(e.status, e.statusText, e.responseText);
+		// 		window.location.href = '/solar.html';
+		// 	}
+		// });
 	}
 };
 const Progress = function() {
