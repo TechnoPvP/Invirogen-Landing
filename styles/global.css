@@ -88,7 +88,7 @@ body {
 	width: 100%;
 	font-family: var(--f-body);
 	color: var(--dark-gray);
-	/* overflow: hidden; */
+	overflow: hidden;
 }
 html {
 	height: calc(100% - 60px);
@@ -266,7 +266,11 @@ a {
 /* Body */
 .flex {
 	display: flex;
-	height: 100%;
+	height: calc(100% - 60px);
+}
+.flex__bottom-bar {
+	height: 60px;
+	width: 100%;
 }
 .flex__wrapper {
 	position: relative;

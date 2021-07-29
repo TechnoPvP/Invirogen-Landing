@@ -3,13 +3,13 @@ const FormWidget = {
 		valid       : false,
 		currentForm : 0,
 		forms       : $('.flex__col'),
-		formList    : [ ...$('.flex__col') ],
-		form        : $('.form'),
-		visibleForm : $('.form:visible')
+		form        : $('.form')
 	},
 
 	init                 : function() {
 		// console.log('Loaded FormWidget');
+		if ($('.progress').length <= 0) return false;
+
 		this.bindUI();
 		Progress().init();
 	},
@@ -84,7 +84,7 @@ const FormWidget = {
 		// Save the form data before moving to another form
 		this.saveData();
 
-		const formAtIndex = $(this.settings.formList[index]);
+		const formAtIndex = $(this.settings.forms[index]);
 		this.settings.currentForm = index;
 
 		Progress().setCurrentProgress(FormWidget.settings.currentForm);
@@ -100,7 +100,7 @@ const FormWidget = {
 			$(formElement).on('submit', function(submitHandler) {
 				submitHandler.preventDefault();
 
-				const buttonValue = $(formElement).find('input[type=submit]').val();
+				const buttonValue = $(formElement).find('#form--button').val();
 				if (buttonValue == 'Submit') {
 					FormWidget.postData();
 					console.log('Attempting to submit');
@@ -188,48 +188,49 @@ const FormWidget = {
 		// TODO Method 1 implemntation using different forms and sessionStorage.
 		const formData = this.serlizeSessionData();
 
-		var request = new XMLHttpRequest();
-		request.open('POST', 'http://adamscode.com/api/inviro/solar');
-		request.onload = function(oEvent) {
-			if (request.readyState === 4) {
-				alert(request.response);
-			}
-
-			if (request.status == 200) {
-				console.log('Uploaded');
-			} else {
-				alert(request.status + ' error occures while uploading file.');
-			}
-		};
-
-		request.send(formData);
-
-		// $.post({
-		// 	cache       : false,
-		// 	// dataType    : 'json',
-		// 	url         : 'https://adamscode.com/api/inviro/solar',
-		// 	// url         : 'http://localhost:3000/api/inviro/solar',
-		// 	data        : formData,
-		// 	mimeType    : 'mutipart/form-data',
-		// 	crossDomain : true,
-		// 	processData : false,
-		// 	contentType : false,
-		// 	// contentType : 'application/json',
-		// 	method      : 'POST',
-		// 	headers     : {
-		// 		// accept                        : 'application/json',
-		// 		'Access-Control-Allow-Origin' : '*'
-		// 	},
-		// 	success     : () => {
-		// 		this.getNextForm();
+		// var request = new XMLHttpRequest();
+		// request.open('POST', 'https://adamscode.com/api/inviro/solar');
+		// request.onload = function(event) {
+		// 	if (request.status == 200) {
+		// 		FormWidget.getNextForm();
 		// 		Progress().disableClick();
-		// 		console.log('Sucessful post');
-		// 	},
-		// 	error       : function(e) {
-		// 		console.log(e.status, e.statusText, e.responseText);
+		// 	} else {
+		// 		console.log('An error occured while trying to submit the form. Refreshing the page.');
 		// 		window.location.href = '/solar.html';
 		// 	}
-		// });
+		// 	if (request.readyState === 4) {
+		// 		console.log('Response' + request.response);
+		// 	}
+		// };
+
+		// request.send(formData);
+
+		$.post({
+			cache       : false,
+			// dataType    : 'json',
+			url         : 'https://adamscode.com/api/inviro/solar',
+			// url         : 'http://localhost:3000/api/inviro/solar',
+			data        : formData,
+			mimeType    : 'mutipart/form-data',
+			crossDomain : true,
+			processData : false,
+			contentType : false,
+			// contentType : 'application/json',
+			method      : 'POST',
+			headers     : {
+				// accept                        : 'application/json',
+				'Access-Control-Allow-Origin' : '*'
+			},
+			success     : () => {
+				this.getNextForm();
+				Progress().disableClick();
+				console.log('Sucessful post');
+			},
+			error       : function(e) {
+				console.log(e.status, e.statusText, e.responseText);
+				window.location.href = '/solar.html';
+			}
+		});
 	}
 };
 const Progress = function() {
@@ -276,6 +277,10 @@ const Progress = function() {
 
 		setCurrentProgress : function(index) {
 			const progressElem = $(s.pointsList[index]);
+
+			// If the progress bar doesn't exsit don't do anything.
+			if (progressElem.length <= 0) return false;
+
 			const indexProgress = progressElem.offset().left;
 			const parentProgress = progressElem.parent().offset().left;
 			const circleOffset = indexProgress - parentProgress;

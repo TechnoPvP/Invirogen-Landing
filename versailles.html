@@ -68,6 +68,7 @@
             <!-- <div class="price"><span>$79,0000 Purchase Price</span></div> -->
         </div>
         <div class="flex__wrapper">
+
             <div class="flex__col flex__col--mgtop active">
                 <h4 class="flex__col__h4">Want To Find Out More?</h4>
                 <p>We're making modern living more accessible by reimagining how we build and buy homes. </p>
@@ -78,12 +79,12 @@
                     <div class="form__wrap form__wrap-col">
                         <div class="form__wrap">
                             <label for="address">First Name</label>
-                            <input class="input" type="text" name="address" />
+                            <input class="input" type="text" name="address" required />
                         </div>
                         <div class="spacer"></div>
                         <div class="form__wrap">
                             <label for="address">Last Name</label>
-                            <input class="input" type="text" name="address" />
+                            <input class="input" type="text" name="address" required />
                         </div>
                     </div>
                     <label for="address">Phone Number</label>
@@ -93,13 +94,28 @@
 
                     <label for="address">Email </label>
                     <div class="form__wrap">
-                        <input class="input" type="text" name="email" />
+                        <input class="input" type="text" name="email" required />
                     </div>
 
-                    <input class="button button--action" type="submit" value="Contact Me" disabled>
+                    <input class="button button--action" type="submit" value="Contact">
                     <span class="text-center">We won't spam you in any way</span>
                 </form>
             </div>
+
+            <!-- Thank You Page -->
+            <div class="flex__col flex__col--center">
+                <h4>Thank You!</h4>
+                <p>
+                    Your quote request has been submitted sucessfully.
+                </p>
+                <a href="/versailles.html" style="margin-bottom: 5px;" class="button button--action button--mgtop">Back
+                    To
+                    Homepage</a>
+                <div class="text--small text--gray">Having Trobule <span id="action--contactus"
+                        class="text--button">Contact Us</span>
+                </div>
+            </div>
+
         </div>
 
     </div>

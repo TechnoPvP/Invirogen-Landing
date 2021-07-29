@@ -111,8 +111,8 @@ $(document).ready(function() {
 		FormWidget.init();
 		NavbarHover.init();
 		Popup().init();
-		TabWidget().init();
 		MobileHelper().init();
+		TabWidget().init();
 	}
 
 	initWidgets();
